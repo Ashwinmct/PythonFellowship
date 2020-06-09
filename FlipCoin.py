@@ -1,6 +1,8 @@
 import random
 
 
+
+
 class FlipCoin:
 
     def simulate_flip(self, flipping_count=None):
@@ -16,7 +18,14 @@ class FlipCoin:
         for term in range(count):
             combination = self.simulate_flip(random.choice([1,2,3]))
             flipping_combinations[combination] = flipping_combinations.get(combination) + 1
-        return flipping_combinations
+        return self.calc_flipping_combination_percentage(count,flipping_combinations)
+
+    def calc_flipping_combination_percentage(self,count, combinations_dictionary):
+        for combination in combinations_dictionary.keys():
+            combinations_dictionary[combination]=(combinations_dictionary.get(combination)/count)*100
+        return combinations_dictionary
+
+
 
 
 flip_coin = FlipCoin()
