@@ -23,6 +23,13 @@ class FlipCoin:
             doublet_combination[combination] = doublet_combination.get(combination) + 1
         return doublet_combination
 
+    def simulate_triplet_flip(self, count):
+        triplet_combination = {'HHH': 0, 'HHT': 0, 'TTT': 0, 'TTH': 0, 'HTH': 0, 'HTT': 0, 'THT': 0, 'THH': 0}
+        for term in range(count):
+            combination = self.simulate_flip(3)
+            triplet_combination[combination] = triplet_combination.get(combination) + 1
+        return triplet_combination
+
 
 flip_coin = FlipCoin()
-print(flip_coin.simulate_doublet_flip(5))
+print(flip_coin.simulate_triplet_flip(5))
