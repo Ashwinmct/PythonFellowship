@@ -1,5 +1,5 @@
 import random
-
+import operator
 
 
 
@@ -20,13 +20,17 @@ class FlipCoin:
             flipping_combinations[combination] = flipping_combinations.get(combination) + 1
         return self.calc_flipping_combination_percentage(count,flipping_combinations)
 
-    def calc_flipping_combination_percentage(self,count, combinations_dictionary):
+    def calc_flipping_combination_percentage(self, combinations_count, combinations_dictionary):
         for combination in combinations_dictionary.keys():
-            combinations_dictionary[combination]=(combinations_dictionary.get(combination)/count)*100
+            combinations_dictionary[combination]= (combinations_dictionary.get(combination) / combinations_count) * 100
         return combinations_dictionary
 
+    def find_lucky_combination(self, coin_combination_dictionary):
+        return max(coin_combination_dictionary.items(), key=operator.itemgetter(1))[0]
 
 
 
 flip_coin = FlipCoin()
-print(flip_coin.simulate_combinational_flip(24))
+flipped_coin_combinations=flip_coin.simulate_combinational_flip(16)
+print(flipped_coin_combinations)
+print("Your lucky combination is, ",flip_coin.find_lucky_combination(flipped_coin_combinations))
