@@ -1,17 +1,19 @@
 import random
 
-salary = 0
-WORKING_HOURS = 8
 PAY_PER_HOUR = 200
+FULL_DAY_PRESENT = 2
+HALF_A_DAY_PRESENT = 1
+ABSENT_FOR_THE_DAY = 0
 
 
-def check_employee_attendance():
-	if (random.randint(0, 9) % 2 == 0):
-		global salary
-		salary = WORKING_HOURS * PAY_PER_HOUR
-		return "Employee is Present"
-	return "Employee is absent"
+def calculate_employee_wage_of_the_day():
+	working_hours = 0
+	attendance_status = random.choice([FULL_DAY_PRESENT, HALF_A_DAY_PRESENT, ABSENT_FOR_THE_DAY])
+	if(attendance_status is FULL_DAY_PRESENT):
+		working_hours = 8
+	elif (attendance_status is HALF_A_DAY_PRESENT):
+		working_hours = 4
+	return working_hours*PAY_PER_HOUR
 
 
-print(check_employee_attendance())
-print("Employee salary is = ", salary)
+print("Employee salary is = ", calculate_employee_wage_of_the_day())
