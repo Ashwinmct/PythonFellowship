@@ -36,3 +36,10 @@ print("map function result ", map_function_result)
 #filter function :used to filter values which doesnt match given condition
 filter_function_result = list(filter(lambda number: number%2==0, numbers_list))
 print("filter function result ", filter_function_result)
+
+#Generator: little similar to iterator
+def generate_number_list(number):
+	for num in range(number):
+		yield num
+
+print(list(generate_number_list(int(input("Enter limit of list you want to generate ")))))
