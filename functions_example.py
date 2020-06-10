@@ -43,3 +43,12 @@ def generate_number_list(number):
 		yield num
 
 print(list(generate_number_list(int(input("Enter limit of list you want to generate ")))))
+
+
+#Recursive function : function which calls it self directly or indirectly
+def calculate_factorial(number):
+	if number == 1:
+		return 1
+	return number * calculate_factorial(number - 1)
+
+print("factorial = ", calculate_factorial(int(input("Enter number to find factorial "))))
