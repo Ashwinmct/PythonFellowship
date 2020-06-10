@@ -1,3 +1,5 @@
+numbers_list = [11, 12, 13, 14, 15]
+
 #Higher order function : function with other function as parameter
 def apply_thrice(function, argument):
 	return function(function(function(argument)))
@@ -17,9 +19,14 @@ def add(number1, number2):
 add_three_numbers = lambda number1, number2, number3: number1 + number2 + number3
 
 
+
 #driver code
 num = int(input("Enter one no. "))
 num2 = 8
 print("value", apply_thrice(multiply_by_two, num))
 print("added value = ", add(int(input("Enter another number : ")), num))
 print(add_three_numbers(num, num2, int(input("Enter another number : "))))
+
+#map function: takes a function and an iterable as parameter
+map_function_result = list(map(multiply_by_two, numbers_list))
+print("map function result ", map_function_result)
