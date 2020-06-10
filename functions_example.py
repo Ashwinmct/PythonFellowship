@@ -27,6 +27,12 @@ print("value", apply_thrice(multiply_by_two, num))
 print("added value = ", add(int(input("Enter another number : ")), num))
 print(add_three_numbers(num, num2, int(input("Enter another number : "))))
 
+print("Example numbers list :", numbers_list)
+
 #map function: takes a function and an iterable as parameter
 map_function_result = list(map(multiply_by_two, numbers_list))
 print("map function result ", map_function_result)
+
+#filter function :used to filter values which doesnt match given condition
+filter_function_result = list(filter(lambda number: number%2==0, numbers_list))
+print("filter function result ", filter_function_result)
