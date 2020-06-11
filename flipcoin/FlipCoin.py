@@ -4,6 +4,8 @@ import operator
 
 class FlipCoin:
     def simulate_flip(self, flipping_count=None):
+        if flipping_count == None:
+            flipping_count = 1
         result_of_flipping = ''
         for flip in range(flipping_count):
             result_of_flipping += random.choice(['H', 'T'])
