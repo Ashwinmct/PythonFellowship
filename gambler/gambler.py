@@ -9,10 +9,7 @@ def gamble(gambling_amount, dead_line, goal):
 	money = gambling_amount
 	while goal > money > dead_line:
 		gamble_status = random.choice([0, 1])
-		if gamble_status == winning_status:
-			money += 1
-		else:
-			money -= 1
+		money = money+1 if gamble_status else money - 1
 	return money
 
 
