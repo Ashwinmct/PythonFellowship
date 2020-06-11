@@ -15,7 +15,9 @@ def gamble(gambling_amount, dead_line, goal):
 
 def print_monthly_report():
 	winning_day_details = dict(filter(lambda day: day[1] > 0, gambling_results_by_day.items()))
-	print("Total days you won: %d, Days you won are " %(len(winning_day_details)), winning_day_details)
+	print("Total days you won: %d, Days you won are " % (len(winning_day_details)), winning_day_details)
+	lost_day_details = dict(filter(lambda day: day[1] <= 0, gambling_results_by_day.items()))
+	print("Total days you lost: %d, Days you won lost " % (len(lost_day_details)), lost_day_details)
 
 
 def print_result():
@@ -45,4 +47,3 @@ def simulate_gambling_for_a_month():
 
 #driving code
 simulate_gambling_for_a_month()
-
