@@ -8,9 +8,11 @@ is_win = 1
 
 def simulate_gambling(times):
 	global money
+	money = stake
 	for term in range(times):
-		money = stake
-		while goal > money > empty_pocket:
+		money_hi_limit = 1.5 * money
+		money_low_limit = 0.5 * money
+		while goal > money > empty_pocket and money_hi_limit > money > money_low_limit :
 			gamble_status = random.choice([0, 1])
 			if gamble_status == is_win:
 				money += 1
