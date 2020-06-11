@@ -1,4 +1,5 @@
 import random
+import operator
 
 stake = 100
 winning_status = 1
@@ -17,7 +18,7 @@ def print_monthly_report():
 	winning_day_details = dict(filter(lambda day: day[1] > 0, gambling_results_by_day.items()))
 	print("Total days you won: %d, Days you won are " % (len(winning_day_details)), winning_day_details)
 	lost_day_details = dict(filter(lambda day: day[1] <= 0, gambling_results_by_day.items()))
-	print("Total days you lost: %d, Days you won lost " % (len(lost_day_details)), lost_day_details)
+	print("Total days you lost: %d, Days you lost are " % (len(lost_day_details)), lost_day_details)
 
 
 def print_result():
@@ -25,8 +26,10 @@ def print_result():
 	if total_money_loss_or_won > 0:
 		print("You WON by ", total_money_loss_or_won)
 	else:
-		print("You Loss by ", total_money_loss_or_won)
+		print('You LOSS by ', total_money_loss_or_won)
 	print_monthly_report()
+	print("Your luckiest day = ", max(gambling_results_by_day.items(), key=operator.itemgetter(1))[0])
+	print("Your unluckiest day = ", min(gambling_results_by_day.items(), key=operator.itemgetter(1))[0])
 
 
 def simulate_gambling(days):
