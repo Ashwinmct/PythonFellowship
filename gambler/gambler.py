@@ -1,8 +1,7 @@
 import random
 
 stake = 100
-empty_pocket = 0
-is_win = 1
+winning_status = 1
 gambling_results_by_day = {}
 
 
@@ -10,11 +9,19 @@ def gamble(gambling_amount, dead_line, goal):
 	money = gambling_amount
 	while goal > money > dead_line:
 		gamble_status = random.choice([0, 1])
-		if gamble_status == is_win:
+		if gamble_status == winning_status:
 			money += 1
 		else:
 			money -= 1
 	return money
+
+
+def print_result():
+	total_money_loss_or_won = sum(gambling_results_by_day.values())
+	if total_money_loss_or_won > 0:
+		print("You WON by ", total_money_loss_or_won)
+	else:
+		print("You Loss by ", total_money_loss_or_won)
 
 
 def simulate_gambling(days):
@@ -26,6 +33,7 @@ def simulate_gambling(days):
 		money_low_limit = 0.5 * money
 		money = gamble(money_before_gamble, money_low_limit, money_hi_limit)
 		gambling_results_by_day[day + 1] = money - money_before_gamble
+	return print_result()
 
 
 simulate_gambling(int(input("Enter no of days you want play gambling ")))
