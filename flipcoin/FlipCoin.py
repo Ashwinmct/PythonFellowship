@@ -2,6 +2,19 @@ import random
 import operator
 
 
+class Input:
+
+    @staticmethod
+    def get_input(message, input_type):
+        try:
+            value = input_type(input(message))
+            return value
+        except ValueError:
+            print(" Wrong type of value Entered, Enter again")
+            return Input.get_input(message, input_type)
+
+
+
 class FlipCoin:
     def simulate_flip(self, flipping_count=None):
         if flipping_count == None:
@@ -30,7 +43,7 @@ class FlipCoin:
 
 #driver code
 flip_coin = FlipCoin()
-count_of_flips = int(input("Enter numbers of time you want to flip coin "))
+count_of_flips = Input.get_input("Enter numbers of time you want to flip coin ", int)
 flipped_coin_combinations = flip_coin.simulate_combinational_flip(count_of_flips)
 print(flipped_coin_combinations, "\nYour lucky combination is, ",
       flip_coin.find_lucky_combination(flipped_coin_combinations))
