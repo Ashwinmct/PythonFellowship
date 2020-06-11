@@ -13,12 +13,18 @@ def gamble(gambling_amount, dead_line, goal):
 	return money
 
 
+def print_monthly_report():
+	winning_day_details = dict(filter(lambda day: day[1] > 0, gambling_results_by_day.items()))
+	print("Total days you won: %d, Days you won are " %(len(winning_day_details)), winning_day_details)
+
+
 def print_result():
 	total_money_loss_or_won = sum(gambling_results_by_day.values())
 	if total_money_loss_or_won > 0:
 		print("You WON by ", total_money_loss_or_won)
 	else:
 		print("You Loss by ", total_money_loss_or_won)
+	print_monthly_report()
 
 
 def simulate_gambling(days):
@@ -33,5 +39,10 @@ def simulate_gambling(days):
 	return print_result()
 
 
-simulate_gambling(int(input("Enter no of days you want play gambling ")))
-print(gambling_results_by_day)
+def simulate_gambling_for_a_month():
+	simulate_gambling(30)
+
+
+#driving code
+simulate_gambling_for_a_month()
+
