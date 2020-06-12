@@ -1,16 +1,5 @@
 import random
-
-
-class Input:
-
-	@staticmethod
-	def get_input(message, input_type):
-		try:
-			value = input_type(input(message))
-			return value
-		except ValueError:
-			print(" Wrong type of value Entered, Enter again")
-			return Input.get_input(message, input_type)
+from utilities.input import Input
 
 
 class TicTacToe:
@@ -216,7 +205,7 @@ class TicTacToe:
 
 	def print_winner(self):
 		self.winner = "You" if(self.check_winner() == self.user) else "Computer"
-		print("%s won the match" %self.winner)
+		print("%s won the match" % self.winner)
 
 
 # driver code
