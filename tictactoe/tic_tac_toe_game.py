@@ -22,6 +22,7 @@ class TicTacToe:
 	player2 = ''
 	NO_WINNER = "-1"
 	TOTAL_CELLS = 9
+	STARTING_CELL = 1
 
 	def __init__(self):
 		if input(
@@ -35,9 +36,11 @@ class TicTacToe:
 		tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 
 	def play_game(self):
+		global player1, player2
 		for cell in range(self.TOTAL_CELLS):
 			if cell % 2 == 0:
-				player_input = self.get_input(self.player1)
+				player_input = self.get_input(player1)
+				self.store_board(player_input, player1)
 		self.initialise_game()
 		self.print_board()
 
@@ -109,12 +112,24 @@ class TicTacToe:
 			return self.get_user_input()
 
 	def get_user_input(self):
-		global board_status_list
+		global board_status_list, STARTING_CELL
 		user_input = Input.get_input("Enter the position you want", int)
-		if self.board_status_list.__contains__(user_input) and (user_input > self.TOTAL_CELLS or user_input <= 0):
-			print("Entered Incorrect value \nPlease Enter Again")
+		if self.board_status_list.__contains__(user_input) and (user_input > self.TOTAL_CELLS or user_input < STARTING_CELL):
+			print("Entered Incorrect option \nPlease Enter Again")
 			return self.get_user_input()
 		return user_input
+
+	def store_board(self, position, player):
+		cell_position = position % 3
+		if position <= 3:
+			tic_tac_toe_board[0][cell_position] = player
+			return
+		if 3 < position <= 6:
+			tic_tac_toe_board[1][cell_position] = player
+			return
+		if position > 6:
+			tic_tac_toe_board[2][cell_position] = player
+			return
 
 
 # driver code
