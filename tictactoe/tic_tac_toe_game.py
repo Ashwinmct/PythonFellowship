@@ -13,13 +13,16 @@ class Input:
 			return Input.get_input(message, input_type)
 
 
+
 class TicTacToe:
+	board_status_list = []
 	tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 	user = ''
 	computer = ''
 	player1 = ''
 	player2 = ''
 	no_winner = "-1"
+	TOTAL_CELLS = 9
 
 	def __init__(self):
 		if input(
@@ -33,6 +36,9 @@ class TicTacToe:
 		tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 
 	def play_game(self):
+		for cell in range(self.TOTAL_CELLS):
+			if cell % 2 == 0:
+				player_input = self.get_input(self.player1)
 		self.initialise_game()
 		self.print_board()
 
@@ -44,8 +50,8 @@ class TicTacToe:
 
 	def initialise_game(self):
 		self.reset_board()
-		print("Welcome to the game \nBoard Layout: \n 1 || 2 || 3 \n 4 || 5 || 6 \n 7 || 8 || 9")
-		print("Enter position you want as shown as above")
+		print("Welcome to the game \nBoard Layout: \n 1 || 2 || 3 \n 4 || 5 || 6 \n 7 || 8 || 9 "
+		      "\nEnter position you want as shown as above")
 		self.set_values()
 
 	def set_values(self):
@@ -84,18 +90,32 @@ class TicTacToe:
 			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] and tic_tac_toe_board[column][0] != '':
 				return tic_tac_toe_board[column][0]
 
-		###check pricipal diagonal
+		###check principal diagonal
 		for column in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] and tic_tac_toe_board[1][1] != '':
 				return tic_tac_toe_board[1][1]
 
-		###check pricipal diagonal
+		###check secondary diagonal
 		for column in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[0][1] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] and tic_tac_toe_board[1][1] != '':
 				return tic_tac_toe_board[1][1]
 
 		#if no winning combination is found
 		return self.no_winner
+
+	def get_input(self,player):
+		if user == player:
+			return self.get_user_input()
+
+	def get_user_input(self):
+		global board_status_list
+		user_input = Input.get_input("Enter the position you want", int)
+		if self.board_status_list.__contains__(user_input) and user_input > self.TOTAL_CELLS:
+			print("Entered Incorrect value \nPlease Enter Again")
+			return self.get_user_input()
+		return user_input
+
+
 
 # driver code
 tic_tac_toe = TicTacToe()
