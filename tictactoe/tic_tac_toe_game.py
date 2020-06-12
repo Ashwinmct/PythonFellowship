@@ -141,6 +141,13 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
+		computer_input = self.check_available_cells()
+		if self.board_status_list.__contains__(computer_input):
+			return self.generate_computer_input()
+		self.board_status_list.append(computer_input)
+		return computer_input
+
+	def check_available_cells(self):
 		#check corners
 		for cell in self.CORNERS:
 			if not self.board_status_list.__contains__(cell):
@@ -152,11 +159,6 @@ class TicTacToe:
 		for cell in self.SIDES:
 			if not self.board_status_list.__contains__(cell):
 				return cell
-		computer_input = random.randint(self.STARTING_CELL, self.TOTAL_CELLS+1)
-		if self.board_status_list.__contains__(computer_input):
-			return self.generate_computer_input()
-		self.board_status_list.append(computer_input)
-		return computer_input
 
 
 # driver code
