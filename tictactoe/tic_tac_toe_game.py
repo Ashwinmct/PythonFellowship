@@ -37,12 +37,15 @@ class TicTacToe:
 
 	def play_game(self):
 		global player1, player2
+		self.initialise_game()
+		self.print_board()
 		for cell in range(self.TOTAL_CELLS):
 			if cell % 2 == 0:
 				player_input = self.get_input(player1)
 				self.store_board(player_input, player1)
-		self.initialise_game()
-		self.print_board()
+			else :
+				player_input = self.get_input(player2)
+				self.store_board(player_input, player2)
 
 	def print_board(self):
 		global tic_tac_toe_board
@@ -110,6 +113,7 @@ class TicTacToe:
 	def get_input(self, player):
 		if user == player:
 			return self.get_user_input()
+		return self.generate_computer_input()
 
 	def get_user_input(self):
 		global board_status_list, STARTING_CELL
@@ -130,6 +134,13 @@ class TicTacToe:
 		if position > 6:
 			tic_tac_toe_board[2][cell_position] = player
 			return
+
+	def generate_computer_input(self):
+		global STARTING_CELL, TOTAL_CELLS
+		computer_input = range(STARTING_CELL, TOTAL_CELLS+1)
+		if self.board_status_list.__contains__(computer_input):
+			return self.generate_computer_input()
+		return computer_input
 
 
 # driver code
