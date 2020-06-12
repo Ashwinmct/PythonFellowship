@@ -19,6 +19,7 @@ class TicTacToe:
 	computer = ''
 	player1 = ''
 	player2 = ''
+	no_winner = "-1"
 
 	def __init__(self):
 		if input(
@@ -72,6 +73,29 @@ class TicTacToe:
 			self.player1 = self.computer
 			self.player2 = self.user
 
+	def check_winner(self):
+		###check rows
+		for row in range(len(tic_tac_toe_board)):
+			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] and tic_tac_toe_board[row][0] != '':
+				return tic_tac_toe_board[row][0]
+
+		###check columns
+		for column in range(len(tic_tac_toe_board)):
+			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] and tic_tac_toe_board[column][0] != '':
+				return tic_tac_toe_board[column][0]
+
+		###check pricipal diagonal
+		for column in range(len(tic_tac_toe_board)):
+			if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] and tic_tac_toe_board[1][1] != '':
+				return tic_tac_toe_board[1][1]
+
+		###check pricipal diagonal
+		for column in range(len(tic_tac_toe_board)):
+			if tic_tac_toe_board[0][1] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] and tic_tac_toe_board[1][1] != '':
+				return tic_tac_toe_board[1][1]
+
+		#if no winning combination is found
+		return self.no_winner
 
 # driver code
 tic_tac_toe = TicTacToe()
