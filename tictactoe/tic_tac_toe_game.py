@@ -61,18 +61,18 @@ class TicTacToe:
 		self.set_values()
 
 	def set_values(self):
-		global user, computer
 		if random.randint(0, 1) == 0:
 			print("You will be 'O' \n Computer will be 'X' ")
-			computer = 'x'
-			user = 'o'
+			self.computer = 'x'
+			self.user = 'o'
 		else:
 			print("You will be 'X' \n Computer will be 'O' ")
-			computer = 'o'
-			user = 'x'
+			self.computer = 'o'
+			self.user = 'x'
 		self.toss_game()
 
 	def toss_game(self):
+		global player1, player2
 		user_choice = Input.get_input("Enter your choice to toss '0' for HEAD and '1' for Tail ", int)
 		toss_result = random.randint(0, 1)
 		if user_choice == toss_result:
@@ -112,19 +112,20 @@ class TicTacToe:
 		return self.NO_WINNER
 
 	def get_input(self, player):
-		if user == player:
+		if self.user == player:
 			return self.get_user_input()
 		return self.generate_computer_input()
 
 	def get_user_input(self):
-		global board_status_list, STARTING_CELL
 		user_input = Input.get_input("Enter the position you want", int)
-		if self.board_status_list.__contains__(user_input) and (user_input > self.TOTAL_CELLS or user_input < STARTING_CELL):
+		if self.board_status_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
 			print("Entered Incorrect option \nPlease Enter Again")
 			return self.get_user_input()
+		self.board_status_list.append(user_input)
 		return user_input
 
 	def store_board(self, position, player):
+		global tic_tac_toe_board
 		cell_position = position % 3
 		if position <= 3:
 			tic_tac_toe_board[0][cell_position] = player
@@ -140,6 +141,7 @@ class TicTacToe:
 		computer_input = random.randint(self.STARTING_CELL, self.TOTAL_CELLS+1)
 		if self.board_status_list.__contains__(computer_input):
 			return self.generate_computer_input()
+		self.board_status_list.append(computer_input)
 		return computer_input
 
 
