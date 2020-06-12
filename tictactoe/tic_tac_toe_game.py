@@ -23,6 +23,7 @@ class TicTacToe:
 	NO_WINNER = "-1"
 	TOTAL_CELLS = 9
 	STARTING_CELL = 1
+	CORNER_CELLS = [1, 3, 7, 9]
 
 	def __init__(self):
 		if input(
@@ -138,6 +139,11 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
+		#check corners
+		for cell in self.CORNER_CELLS:
+			if not self.board_status_list.__contains__(cell):
+				return cell
+
 		computer_input = random.randint(self.STARTING_CELL, self.TOTAL_CELLS+1)
 		if self.board_status_list.__contains__(computer_input):
 			return self.generate_computer_input()
