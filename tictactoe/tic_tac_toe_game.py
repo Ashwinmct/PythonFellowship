@@ -36,16 +36,17 @@ class TicTacToe:
 		tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 
 	def play_game(self):
-		global player1, player2
 		self.initialise_game()
+		print("Game Started")
 		self.print_board()
 		for cell in range(self.TOTAL_CELLS):
 			if cell % 2 == 0:
-				player_input = self.get_input(player1)
-				self.store_board(player_input, player1)
+				player_input = self.get_input(self.player1)
+				self.store_board(player_input, self.player1)
 			else :
-				player_input = self.get_input(player2)
-				self.store_board(player_input, player2)
+				player_input = self.get_input(self.player2)
+				self.store_board(player_input, self.player2)
+			self.print_board()
 
 	def print_board(self):
 		global tic_tac_toe_board
@@ -63,12 +64,12 @@ class TicTacToe:
 		global user, computer
 		if random.randint(0, 1) == 0:
 			print("You will be 'O' \n Computer will be 'X' ")
-			computer = str('x')
-			user = str('o')
+			computer = 'x'
+			user = 'o'
 		else:
 			print("You will be 'X' \n Computer will be 'O' ")
-			computer = str('o')
-			user = str('x')
+			computer = 'o'
+			user = 'x'
 		self.toss_game()
 
 	def toss_game(self):
@@ -136,8 +137,7 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
-		global STARTING_CELL, TOTAL_CELLS
-		computer_input = range(STARTING_CELL, TOTAL_CELLS+1)
+		computer_input = random.randint(self.STARTING_CELL, self.TOTAL_CELLS+1)
 		if self.board_status_list.__contains__(computer_input):
 			return self.generate_computer_input()
 		return computer_input
