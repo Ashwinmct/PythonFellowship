@@ -143,9 +143,6 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
-		winning_move = self.check_winning_move()
-		if winning_move != self.EMPTY_CELL_VALUE:
-			computer_input = winning_move
 		computer_input = self.check_available_cells()
 		if self.board_status_list.__contains__(computer_input):
 			return self.generate_computer_input()
@@ -153,6 +150,14 @@ class TicTacToe:
 		return computer_input
 
 	def check_available_cells(self):
+		# check winning move
+		winning_move = self.check_move(self.computer)
+		if winning_move != self.EMPTY_CELL_VALUE:
+			return winning_move
+		# check blocking move
+		blocking_move = self.check_move(self.computer)
+		if blocking_move != self.EMPTY_CELL_VALUE:
+			return blocking_move
 		#check corners
 		for cell in self.CORNERS:
 			if not self.board_status_list.__contains__(cell):
@@ -165,37 +170,43 @@ class TicTacToe:
 			if not self.board_status_list.__contains__(cell):
 				return cell
 
-	def check_winning_move(self):
+	def check_move(self, player):
 		middle_cell = len(tic_tac_toe_board) % 2
 		middle_cell_value = self.TOTAL_CELLS // 2
 		### check rows
 		for row in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == self.computer and tic_tac_toe_board[row][2] == self.EMPTY:
+			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == player and tic_tac_toe_board[row][2] == self.EMPTY:
 				return row + 3
-			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][2] == self.computer and tic_tac_toe_board[row][1] == self.EMPTY:
+			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][2] == player and tic_tac_toe_board[row][1] == self.EMPTY:
 				return row + 2
-			if tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] == self.computer and tic_tac_toe_board[row][0] == self.EMPTY:
+			if tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] == player and tic_tac_toe_board[row][0] == self.EMPTY:
 				return row + 1
 		### check column
 		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == self.computer and tic_tac_toe_board[column][2] == self.EMPTY:
+			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == player and tic_tac_toe_board[column][2] == self.EMPTY:
 				return column + 3
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][2] == self.computer and tic_tac_toe_board[column][1] == self.EMPTY:
+			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][1] == self.EMPTY:
 				return column + 1
-			if tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] == self.computer and tic_tac_toe_board[column][0] == self.EMPTY:
+			if tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][0] == self.EMPTY:
 				return column + 1
 		### for diagonals
-		if tic_tac_toe_board[middle_cell][middle_cell] == self.computer == tic_tac_toe_board[middle_cell - 1][middle_cell - 1] and tic_tac_toe_board[middle_cell+1][middle_cell+1] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell - 1] \
+				and tic_tac_toe_board[middle_cell+1][middle_cell+1] == self.EMPTY :
 			return middle_cell_value + 4
-		if tic_tac_toe_board[middle_cell][middle_cell] == self.computer == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] and tic_tac_toe_board[middle_cell-1][middle_cell-1] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
+				and tic_tac_toe_board[middle_cell-1][middle_cell-1] == self.EMPTY :
 			return middle_cell_value - 4
-		if tic_tac_toe_board[middle_cell - 1][middle_cell - 1] == self.computer == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell - 1][middle_cell - 1] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
+				and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY :
 			return middle_cell_value
-		if tic_tac_toe_board[middle_cell][middle_cell] == self.computer == tic_tac_toe_board[middle_cell - 1][middle_cell + 1] and tic_tac_toe_board[middle_cell+1][middle_cell-1] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell + 1] \
+				and tic_tac_toe_board[middle_cell+1][middle_cell-1] == self.EMPTY :
 			return middle_cell_value + 2
-		if tic_tac_toe_board[middle_cell][middle_cell] == self.computer == tic_tac_toe_board[middle_cell + 1][middle_cell - 1] and tic_tac_toe_board[middle_cell-1][middle_cell + 1] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell + 1][middle_cell - 1] \
+				and tic_tac_toe_board[middle_cell-1][middle_cell + 1] == self.EMPTY :
 			return middle_cell_value - 2
-		if tic_tac_toe_board[middle_cell - 1][middle_cell + 1] == self.computer == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY :
+		if tic_tac_toe_board[middle_cell - 1][middle_cell + 1] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
+				and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY:
 			return middle_cell_value
 		return self.EMPTY_CELL_VALUE
 
