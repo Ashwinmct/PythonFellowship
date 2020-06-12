@@ -21,6 +21,7 @@ class TicTacToe:
 	player1 = ''
 	player2 = ''
 	NO_WINNER = "-1"
+	winner = NO_WINNER
 	TOTAL_CELLS = 9
 	STARTING_CELL = 1
 	CORNERS = [1, 3, 7, 9]
@@ -48,10 +49,16 @@ class TicTacToe:
 			if cell % 2 == 0:
 				player_input = self.get_input(self.player1)
 				self.store_board(player_input, self.player1)
-			else :
+			else:
 				player_input = self.get_input(self.player2)
 				self.store_board(player_input, self.player2)
 			self.print_board()
+			if (self.check_winner() != self.NO_WINNER):
+				self.print_winner()
+				break
+		if (self.winner == self.NO_WINNER):
+			print("Match Tie")
+
 
 	def print_board(self):
 		global tic_tac_toe_board
@@ -209,6 +216,10 @@ class TicTacToe:
 				and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY:
 			return middle_cell_value
 		return self.EMPTY_CELL_VALUE
+
+	def print_winner(self):
+		self.winner = "You" if(self.check_winner() == self.user) else "Computer"
+		print("%s won the match" %self.winner)
 
 
 # driver code
