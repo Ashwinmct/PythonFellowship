@@ -1,15 +1,28 @@
 import random
 
 
+class Input:
+
+	@staticmethod
+	def get_input(message, input_type):
+		try:
+			value = input_type(input(message))
+			return value
+		except ValueError:
+			print(" Wrong type of value Entered, Enter again")
+			return Input.get_input(message, input_type)
+
+
 class TicTacToe:
 	tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 	user = ''
 	computer = ''
 	player1 = ''
 	player2 = ''
-	
+
 	def __init__(self):
-		if input("Welcome to Tic Tac Toe \n do you like to play if yes enter 0 else enter any other number or character ") == '0':
+		if input(
+				"Welcome to Tic Tac Toe \n do you like to play if yes enter 0 else enter any other number or character ") == '0':
 			self.play_game()
 		else:
 			print("Thank you")
@@ -47,8 +60,8 @@ class TicTacToe:
 		self.toss_game()
 
 	def toss_game(self):
-		user_choice = int(input("Enter your choice to toss '0' for HEAD and '1' for Tail "))
-		toss_result = random.randint(0,1)
+		user_choice = Input.get_input("Enter your choice to toss '0' for HEAD and '1' for Tail ", int)
+		toss_result = random.randint(0, 1)
 		if user_choice == toss_result:
 			print('YOU won the toss')
 			self.player1 = self.user
@@ -60,5 +73,5 @@ class TicTacToe:
 			self.player2 = self.user
 
 
-#driver code
+# driver code
 tic_tac_toe = TicTacToe()
