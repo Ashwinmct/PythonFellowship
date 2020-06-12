@@ -47,11 +47,9 @@ class TicTacToe:
 		self.print_board()
 		for cell in range(self.TOTAL_CELLS):
 			if cell % 2 == 0:
-				player_input = self.get_input(self.player1)
-				self.store_board(player_input, self.player1)
+				self.store_board( self.get_input(self.player1), self.player1)
 			else:
-				player_input = self.get_input(self.player2)
-				self.store_board(player_input, self.player2)
+				self.store_board( self.get_input(self.player2), self.player2)
 			self.print_board()
 			if (self.check_winner() != self.NO_WINNER):
 				self.print_winner()
@@ -74,13 +72,12 @@ class TicTacToe:
 
 	def set_values(self):
 		if random.randint(0, 1) == 0:
-			print("You will be 'O' \n Computer will be 'X' ")
 			self.computer = 'x'
 			self.user = 'o'
 		else:
-			print("You will be 'X' \n Computer will be 'O' ")
 			self.computer = 'o'
 			self.user = 'x'
+		print("You will be '%s' \n Computer will be '%s'" %(self.user, self.computer))
 		self.toss_game()
 
 	def toss_game(self):
@@ -131,7 +128,7 @@ class TicTacToe:
 	def get_user_input(self):
 		user_input = Input.get_input("Enter the position you want", int)
 		if self.board_status_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
-			print("Entered Incorrect option \nPlease Enter Again")
+			print("Entered Incorrect option \nPlease Enter Again ")
 			return self.get_user_input()
 		self.board_status_list.append(user_input)
 		return user_input
@@ -162,7 +159,7 @@ class TicTacToe:
 		if winning_move != self.EMPTY_CELL_VALUE:
 			return winning_move
 		# check blocking move
-		blocking_move = self.check_move(self.computer)
+		blocking_move = self.check_move(self.user)
 		if blocking_move != self.EMPTY_CELL_VALUE:
 			return blocking_move
 		#check corners
@@ -193,7 +190,7 @@ class TicTacToe:
 			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == player and tic_tac_toe_board[column][2] == self.EMPTY:
 				return column + 3
 			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][1] == self.EMPTY:
-				return column + 1
+				return column + 2
 			if tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][0] == self.EMPTY:
 				return column + 1
 		### for diagonals
