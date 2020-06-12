@@ -126,7 +126,7 @@ class TicTacToe:
 
 	def store_board(self, position, player):
 		global tic_tac_toe_board
-		cell_position = position % 3
+		cell_position = (position % 3) -1
 		if position <= 3:
 			tic_tac_toe_board[0][cell_position] = player
 			return
