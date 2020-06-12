@@ -13,7 +13,6 @@ class Input:
 			return Input.get_input(message, input_type)
 
 
-
 class TicTacToe:
 	board_status_list = []
 	tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
@@ -21,7 +20,7 @@ class TicTacToe:
 	computer = ''
 	player1 = ''
 	player2 = ''
-	no_winner = "-1"
+	NO_WINNER = "-1"
 	TOTAL_CELLS = 9
 
 	def __init__(self):
@@ -82,39 +81,40 @@ class TicTacToe:
 	def check_winner(self):
 		###check rows
 		for row in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] and tic_tac_toe_board[row][0] != '':
+			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] \
+					and tic_tac_toe_board[row][0] != '':
 				return tic_tac_toe_board[row][0]
 
 		###check columns
 		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] and tic_tac_toe_board[column][0] != '':
+			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] \
+					and tic_tac_toe_board[column][0] != '':
 				return tic_tac_toe_board[column][0]
 
 		###check principal diagonal
-		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] and tic_tac_toe_board[1][1] != '':
-				return tic_tac_toe_board[1][1]
+		if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] \
+				and tic_tac_toe_board[1][1] != '':
+			return tic_tac_toe_board[1][1]
 
 		###check secondary diagonal
-		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[0][1] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] and tic_tac_toe_board[1][1] != '':
-				return tic_tac_toe_board[1][1]
+		if tic_tac_toe_board[0][1] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] \
+				and tic_tac_toe_board[1][1] != '':
+			return tic_tac_toe_board[1][1]
 
-		#if no winning combination is found
-		return self.no_winner
+		# if no winning combination is found
+		return self.NO_WINNER
 
-	def get_input(self,player):
+	def get_input(self, player):
 		if user == player:
 			return self.get_user_input()
 
 	def get_user_input(self):
 		global board_status_list
 		user_input = Input.get_input("Enter the position you want", int)
-		if self.board_status_list.__contains__(user_input) and user_input > self.TOTAL_CELLS:
+		if self.board_status_list.__contains__(user_input) and (user_input > self.TOTAL_CELLS or user_input <= 0):
 			print("Entered Incorrect value \nPlease Enter Again")
 			return self.get_user_input()
 		return user_input
-
 
 
 # driver code
