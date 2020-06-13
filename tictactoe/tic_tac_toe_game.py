@@ -141,11 +141,11 @@ class TicTacToe:
 	def check_available_moves(self):
 		# check winning move
 		winning_move = self.check_move(self.computer)
-		if winning_move != self.EMPTY_CELL_VALUE:
+		if not self.board_status_list.__contains__(winning_move) and winning_move != self.EMPTY_CELL_VALUE:
 			return winning_move
 		# check blocking move
 		blocking_move = self.check_move(self.user)
-		if blocking_move != self.EMPTY_CELL_VALUE:
+		if not self.board_status_list.__contains__(blocking_move) and blocking_move != self.EMPTY_CELL_VALUE:
 			return blocking_move
 		#check corners
 		for cell in self.CORNERS:
@@ -162,6 +162,9 @@ class TicTacToe:
 	def check_move(self, player):
 		middle_cell = len(tic_tac_toe_board) % 2
 		middle_cell_value = self.TOTAL_CELLS // 2
+		down_row_starting_value = 7
+		top_row_starting_value = 1
+		mid_row_starting_value  = 4
 		### check rows
 		for row in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == player and tic_tac_toe_board[row][2] == self.EMPTY:
@@ -173,11 +176,11 @@ class TicTacToe:
 		### check column
 		for column in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[0][column] == tic_tac_toe_board[1][column] == player and tic_tac_toe_board[2][column] == self.EMPTY:
-				return column + 3
+				return column + down_row_starting_value
 			if tic_tac_toe_board[0][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[1][column] == self.EMPTY:
-				return column + 2
+				return column + mid_row_starting_value
 			if tic_tac_toe_board[1][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[0][column] == self.EMPTY:
-				return column + 1
+				return column + top_row_starting_value
 		### for diagonals
 		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell - 1] \
 				and tic_tac_toe_board[middle_cell+1][middle_cell+1] == self.EMPTY :
