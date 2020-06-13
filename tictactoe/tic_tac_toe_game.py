@@ -23,8 +23,7 @@ class TicTacToe:
 		if input(
 				"Welcome to Tic Tac Toe \n do you like to play if yes enter 0 else enter any other number or character ") == '0':
 			self.play_game()
-		else:
-			print("Thank you")
+		print("Thank you")
 
 	def reset_board(self):
 		global tic_tac_toe_board
@@ -46,10 +45,9 @@ class TicTacToe:
 		if (self.winner == self.NO_WINNER):
 			print("Match Tie")
 
-
 	def print_board(self):
 		global tic_tac_toe_board
-		print("Your Board")
+		print("TicTacToe Board")
 		for row in range(len(tic_tac_toe_board)):
 			print("%s || %s || %s" % (tic_tac_toe_board[row][0], tic_tac_toe_board[row][1], tic_tac_toe_board[row][2]))
 
@@ -71,7 +69,7 @@ class TicTacToe:
 
 	def toss_game(self):
 		global player1, player2
-		user_choice = Input.get_input("Enter your choice to toss '0' for HEAD and '1' for Tail ", int)
+		user_choice = Input.get_input("Enter your choice to toss '0' for HEAD or another number for Tail ", int)
 		toss_result = random.randint(0, 1)
 		if user_choice == toss_result:
 			print('YOU won the toss')
@@ -136,13 +134,11 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
-		computer_input = self.check_available_cells()
-		if self.board_status_list.__contains__(computer_input):
-			return self.generate_computer_input()
-		self.board_status_list.append(computer_input)
-		return computer_input
+		computer_move = self.check_available_moves()
+		self.board_status_list.append(computer_move)
+		return computer_move
 
-	def check_available_cells(self):
+	def check_available_moves(self):
 		# check winning move
 		winning_move = self.check_move(self.computer)
 		if winning_move != self.EMPTY_CELL_VALUE:
