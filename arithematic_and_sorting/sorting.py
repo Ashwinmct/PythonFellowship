@@ -1,10 +1,15 @@
 import operator
 from utilities.Input import Input
-
+from arithematic_and_sorting.exceptions.InvalidComputationException import InvalidComputationException
 
 class Sorter:
 	def compute(self, number1, number2, number3, operator1, operator2):
-		return operator1(number1, operator2(number2, number3))
+		try:
+			return operator1(number1, operator2(number2, number3))
+		except ZeroDivisionError as err:
+			print("Divided by zero", err)
+		except TypeError:
+			raise InvalidComputationException("Values type mismatch")
 
 
 
@@ -17,3 +22,9 @@ print("%d + ( %d * %d ) = " % (number1, number2, number3), sorter.compute(number
 print("%d * ( %d + %d ) = " % (number1, number2, number3), sorter.compute(number1, number2, number3, operator.__mul__, operator.__add__))
 print("%d + ( %d / %d ) = " % (number1, number2, number3), sorter.compute(number1, number2, number3, operator.__add__, operator.__truediv__))
 print("%d mod ( %d + %d ) = " % (number1, number2, number3), sorter.compute(number1, number2, number3, operator.__mod__, operator.__add__))
+print("%d + ( %d * %d ) = " % (number1, number2, number3), sorter.compute(number1, number2, number3, operator.__add__, operator.__mul__))
+
+try:
+	sorter.compute('a', 'c', 'b', operator.__add__, operator.__mul__)
+except InvalidComputationException as exp:
+	print(exp)
