@@ -90,9 +90,9 @@ class TicTacToe:
 
 		###check columns
 		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] \
-					and tic_tac_toe_board[column][0] != '':
-				return tic_tac_toe_board[column][0]
+			if tic_tac_toe_board[0][column] == tic_tac_toe_board[1][column] == tic_tac_toe_board[2][column] \
+					and tic_tac_toe_board[0][column] != '':
+				return tic_tac_toe_board[0][column]
 
 		###check principal diagonal
 		if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] \
@@ -113,7 +113,7 @@ class TicTacToe:
 		return self.generate_computer_input()
 
 	def get_user_input(self):
-		user_input = Input.get_input("Enter the position you want", int)
+		user_input = Input.get_input("Enter the position you want ", int)
 		if self.board_status_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
 			print("Entered Incorrect option \nPlease Enter Again ")
 			return self.get_user_input()
@@ -172,11 +172,11 @@ class TicTacToe:
 				return row + 1
 		### check column
 		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][1] == player and tic_tac_toe_board[column][2] == self.EMPTY:
+			if tic_tac_toe_board[0][column] == tic_tac_toe_board[1][column] == player and tic_tac_toe_board[2][column] == self.EMPTY:
 				return column + 3
-			if tic_tac_toe_board[column][0] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][1] == self.EMPTY:
+			if tic_tac_toe_board[0][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[1][column] == self.EMPTY:
 				return column + 2
-			if tic_tac_toe_board[column][1] == tic_tac_toe_board[column][2] == player and tic_tac_toe_board[column][0] == self.EMPTY:
+			if tic_tac_toe_board[1][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[0][column] == self.EMPTY:
 				return column + 1
 		### for diagonals
 		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell - 1] \
