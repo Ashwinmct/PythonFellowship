@@ -12,13 +12,17 @@ class SnakeAndLadder:
 	def __play_game(self):
 		player1_position = self.BOARD_STARTING
 		player2_position = self.BOARD_END
+		dice_count = 0
 		while [self.game_status]:
 			player1_position = self.__get_position(player1_position)
+			dice_count += 1
 			player2_position = self.__get_position(player2_position)
+			dice_count += 1
 			if player1_position or player2_position is self.BOARD_END:
 				break
 
 	def __get_dice_value(self, dice_value=0):
+		dice = self.__roll_dice
 		dice_value += self.__roll_dice
 		if dice_value % 6 == 0:
 			return self.__get_dice_value(dice_value)
