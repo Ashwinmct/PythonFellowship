@@ -8,19 +8,16 @@ from utilities.input import Input
 
 class TicTacToe:
 	cells_occupied_list = []
-	tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
-	user = ''
-	computer = ''
-	player1 = ''
-	player2 = ''
+	EMPTY = ''
+	tic_tac_toe_board = []
+	user = EMPTY
+	computer = EMPTY
+	player1 = EMPTY
+	player2 = EMPTY
 	NO_WINNER = "-1"
 	winner = NO_WINNER
 	TOTAL_CELLS = 9
 	STARTING_CELL = 1
-	CORNERS = [1, 3, 7, 9]
-	CENTER_CELL = 5
-	SIDES = [2, 4, 6, 8]
-	EMPTY = ''
 	EMPTY_CELL_VALUE = 0
 
 	def __init__(self):
@@ -138,29 +135,20 @@ class TicTacToe:
 			return
 
 	def generate_computer_input(self):
-		computer_move = self.check_available_moves()
+		computer_move = self.get_available_move()
 		self.cells_occupied_list.append(computer_move)
 		return computer_move
 
-	def check_available_moves(self):
+	def get_available_move(self):
+		cell_priority_list = [1, 3, 7, 9, 5, 2, 4, 6, 8]
+		players = [ self.computer, self.user]
 		board_details_list = self.get_board_status()
-		# check winning move
-		winning_move = self.check_move(self.computer, board_details_list)
-		if not self.cells_occupied_list.__contains__(winning_move) and winning_move != self.EMPTY_CELL_VALUE:
-			return winning_move
-		# check blocking move
-		blocking_move = self.check_move(self.user, board_details_list)
-		if not self.cells_occupied_list.__contains__(blocking_move) and blocking_move != self.EMPTY_CELL_VALUE:
-			return blocking_move
-		#check corners
-		for cell in self.CORNERS:
-			if not self.cells_occupied_list.__contains__(cell):
-				return cell
-		#check_centre
-		if not self.cells_occupied_list.__contains__(self.CENTER_CELL):
-			return self.CENTER_CELL
-		#check sides
-		for cell in self.SIDES:
+		for player in players :
+			move = self.check_move(player, board_details_list)
+			if not self.cells_occupied_list.__contains__(move) and move != self.EMPTY_CELL_VALUE:
+				return move
+
+		for cell in cell_priority_list:
 			if not self.cells_occupied_list.__contains__(cell):
 				return cell
 
@@ -174,7 +162,6 @@ class TicTacToe:
 			if board_list[cell[2]] == board_list[cell[1]] == player and board_list[cell[0]] == self.EMPTY:
 				return cell[0]+1
 		return self.EMPTY_CELL_VALUE
-
 
 	def print_winner(self):
 		self.winner = "You" if(self.check_winner() == self.user) else "Computer"
