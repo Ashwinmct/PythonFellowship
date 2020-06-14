@@ -2,14 +2,9 @@ import random
 from utilities.input import Input
 
 
-
-
-
-
 class TicTacToe:
 	cells_occupied_list = []
 	EMPTY = ''
-	tic_tac_toe_board = []
 	user = EMPTY
 	computer = EMPTY
 	player1 = EMPTY
@@ -40,10 +35,10 @@ class TicTacToe:
 			else:
 				self.store_board(self.get_input(self.player2), self.player2)
 			self.print_board()
-			if (self.check_winner() != self.NO_WINNER):
+			if self.check_winner() != self.NO_WINNER:
 				self.print_winner()
 				break
-		if (self.winner == self.NO_WINNER):
+		if self.winner == self.NO_WINNER:
 			print("Match Tie")
 
 	def print_board(self):
@@ -65,7 +60,7 @@ class TicTacToe:
 		else:
 			self.computer = 'o'
 			self.user = 'x'
-		print("You will be '%s' \n Computer will be '%s'" %(self.user, self.computer))
+		print("You will be '%s' \n Computer will be '%s'" % (self.user, self.computer))
 		self.toss_game()
 
 	def toss_game(self):
@@ -115,9 +110,15 @@ class TicTacToe:
 
 	def get_user_input(self):
 		user_input = Input.get_input("Enter the position you want ", int)
-		if self.cells_occupied_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
-			print("Entered Incorrect option \nPlease Enter Again ")
-			return self.get_user_input()
+		condition_dictionary = {
+			user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL:
+				"Entered Incorrect option \nPlease Enter Again",
+			self.cells_occupied_list.__contains__(user_input):
+				"Entered Position Already Occupied \nPlease Enter Again "}
+		for condition, message in condition_dictionary.items():
+			if condition is True:
+				print(message)
+				return self.get_user_input()
 		self.cells_occupied_list.append(user_input)
 		return user_input
 
@@ -141,9 +142,9 @@ class TicTacToe:
 
 	def get_available_move(self):
 		cell_priority_list = [1, 3, 7, 9, 5, 2, 4, 6, 8]
-		players = [ self.computer, self.user]
+		players = [self.computer, self.user]
 		board_details_list = self.get_board_status()
-		for player in players :
+		for player in players:
 			move = self.check_move(player, board_details_list)
 			if not self.cells_occupied_list.__contains__(move) and move != self.EMPTY_CELL_VALUE:
 				return move
