@@ -22,14 +22,11 @@ class SnakeAndLadder:
 				break
 
 	def __get_dice_value(self, dice_value=0):
-		dice = self.__roll_dice
-		dice_value += self.__roll_dice
+		dice_value += random.randint(1, 7)
 		if dice_value % 6 == 0:
 			return self.__get_dice_value(dice_value)
 		return dice_value
 
-	def __roll_dice(self):
-		return random.randint(1, 6)
 
 	def __get_position(self, player_position):
 		dice_value = self.__get_dice_value()
