@@ -7,19 +7,19 @@ class BinaryOperations:
 		while number > 1:
 			binary_string = str(number % 2) + binary_string
 			number = number // 2
-		return '1' + binary_string
+		return BinaryOperations.convert_to_nibble('1' + binary_string)
+
 
 	@classmethod
-	def convert_to_nibble(cls, number):
-		standard_nibble_length = 4
-		binary_number = BinaryOperations.to_binary(number)
-		if len(binary_number)%standard_nibble_length != 0:
-			binary_number = (standard_nibble_length - len(binary_number) % standard_nibble_length) * '0' + binary_number
+	def convert_to_nibble(cls, binary_number):
+		STANDARD_NIBBLE_LENGTH = 4
+		if len(binary_number)%STANDARD_NIBBLE_LENGTH != 0:
+			binary_number = (STANDARD_NIBBLE_LENGTH - len(binary_number) % STANDARD_NIBBLE_LENGTH) * '0' + binary_number
 		return binary_number
 
 
 #driver code
 if __name__ == "__main__":
-	number = 1
-	binary_number = BinaryOperations.convert_to_nibble(number)
+	number = 5
+	binary_number = BinaryOperations.to_binary(number)
 	print(binary_number)
