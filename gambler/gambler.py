@@ -4,13 +4,15 @@ import operator
 stake = 100
 winning_status = 1
 gambling_results_by_day = {}
-
+bet = 1
+goal_conversion_factor = 1.5
+deadline_conversion_factor = 0.5
 
 def gamble(gambling_amount, dead_line, goal):
 	money = gambling_amount
 	while goal > money > dead_line:
 		gamble_status = random.choice([0, 1])
-		money = money+1 if gamble_status else money - 1
+		money = money + bet if gamble_status else money - bet
 	return money
 
 
@@ -35,8 +37,8 @@ def simulate_gambling(days):
 	money = stake
 	for day in range(days):
 		money_before_gamble = money
-		money_hi_limit = 1.5 * money
-		money_low_limit = 0.5 * money
+		money_hi_limit = goal_conversion_factor * money
+		money_low_limit = deadline_conversion_factor * money
 		money = gamble(money_before_gamble, money_low_limit, money_hi_limit)
 		gambling_results_by_day[day + 1] = money - money_before_gamble
 	print_monthly_result()
