@@ -2,8 +2,12 @@ import random
 from utilities.input import Input
 
 
+
+
+
+
 class TicTacToe:
-	board_status_list = []
+	cells_occupied_list = []
 	tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 	user = ''
 	computer = ''
@@ -35,9 +39,9 @@ class TicTacToe:
 		self.print_board()
 		for cell in range(self.TOTAL_CELLS):
 			if cell % 2 == 0:
-				self.store_board( self.get_input(self.player1), self.player1)
+				self.store_board(self.get_input(self.player1), self.player1)
 			else:
-				self.store_board( self.get_input(self.player2), self.player2)
+				self.store_board(self.get_input(self.player2), self.player2)
 			self.print_board()
 			if (self.check_winner() != self.NO_WINNER):
 				self.print_winner()
@@ -100,7 +104,7 @@ class TicTacToe:
 			return tic_tac_toe_board[1][1]
 
 		###check secondary diagonal
-		if tic_tac_toe_board[0][1] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] \
+		if tic_tac_toe_board[0][2] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] \
 				and tic_tac_toe_board[1][1] != '':
 			return tic_tac_toe_board[1][1]
 
@@ -114,15 +118,15 @@ class TicTacToe:
 
 	def get_user_input(self):
 		user_input = Input.get_input("Enter the position you want ", int)
-		if self.board_status_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
+		if self.cells_occupied_list.__contains__(user_input) or (user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL):
 			print("Entered Incorrect option \nPlease Enter Again ")
 			return self.get_user_input()
-		self.board_status_list.append(user_input)
+		self.cells_occupied_list.append(user_input)
 		return user_input
 
 	def store_board(self, position, player):
 		global tic_tac_toe_board
-		cell_position = (position % 3) -1
+		cell_position = (position % 3) - 1
 		if position <= 3:
 			tic_tac_toe_board[0][cell_position] = player
 			return
@@ -135,76 +139,54 @@ class TicTacToe:
 
 	def generate_computer_input(self):
 		computer_move = self.check_available_moves()
-		self.board_status_list.append(computer_move)
+		self.cells_occupied_list.append(computer_move)
 		return computer_move
 
 	def check_available_moves(self):
+		board_details_list = self.get_board_status()
 		# check winning move
-		winning_move = self.check_move(self.computer)
-		if not self.board_status_list.__contains__(winning_move) and winning_move != self.EMPTY_CELL_VALUE:
+		winning_move = self.check_move(self.computer, board_details_list)
+		if not self.cells_occupied_list.__contains__(winning_move) and winning_move != self.EMPTY_CELL_VALUE:
 			return winning_move
 		# check blocking move
-		blocking_move = self.check_move(self.user)
-		if not self.board_status_list.__contains__(blocking_move) and blocking_move != self.EMPTY_CELL_VALUE:
+		blocking_move = self.check_move(self.user, board_details_list)
+		if not self.cells_occupied_list.__contains__(blocking_move) and blocking_move != self.EMPTY_CELL_VALUE:
 			return blocking_move
 		#check corners
 		for cell in self.CORNERS:
-			if not self.board_status_list.__contains__(cell):
+			if not self.cells_occupied_list.__contains__(cell):
 				return cell
 		#check_centre
-		if not self.board_status_list.__contains__(self.CENTER_CELL):
+		if not self.cells_occupied_list.__contains__(self.CENTER_CELL):
 			return self.CENTER_CELL
 		#check sides
 		for cell in self.SIDES:
-			if not self.board_status_list.__contains__(cell):
+			if not self.cells_occupied_list.__contains__(cell):
 				return cell
 
-	def check_move(self, player):
-		middle_cell = len(tic_tac_toe_board) % 2
-		middle_cell_value = self.TOTAL_CELLS // 2
-		down_row_starting_value = 7
-		top_row_starting_value = 1
-		mid_row_starting_value  = 4
-		### check rows
-		for row in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == player and tic_tac_toe_board[row][2] == self.EMPTY:
-				return row + 3
-			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][2] == player and tic_tac_toe_board[row][1] == self.EMPTY:
-				return row + 2
-			if tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] == player and tic_tac_toe_board[row][0] == self.EMPTY:
-				return row + 1
-		### check column
-		for column in range(len(tic_tac_toe_board)):
-			if tic_tac_toe_board[0][column] == tic_tac_toe_board[1][column] == player and tic_tac_toe_board[2][column] == self.EMPTY:
-				return column + down_row_starting_value
-			if tic_tac_toe_board[0][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[1][column] == self.EMPTY:
-				return column + mid_row_starting_value
-			if tic_tac_toe_board[1][column] == tic_tac_toe_board[2][column] == player and tic_tac_toe_board[0][column] == self.EMPTY:
-				return column + top_row_starting_value
-		### for diagonals
-		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell - 1] \
-				and tic_tac_toe_board[middle_cell+1][middle_cell+1] == self.EMPTY :
-			return middle_cell_value + 4
-		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
-				and tic_tac_toe_board[middle_cell-1][middle_cell-1] == self.EMPTY :
-			return middle_cell_value - 4
-		if tic_tac_toe_board[middle_cell - 1][middle_cell - 1] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
-				and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY :
-			return middle_cell_value
-		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell - 1][middle_cell + 1] \
-				and tic_tac_toe_board[middle_cell+1][middle_cell-1] == self.EMPTY :
-			return middle_cell_value + 2
-		if tic_tac_toe_board[middle_cell][middle_cell] == player == tic_tac_toe_board[middle_cell + 1][middle_cell - 1] \
-				and tic_tac_toe_board[middle_cell-1][middle_cell + 1] == self.EMPTY :
-			return middle_cell_value - 2
-		if tic_tac_toe_board[middle_cell - 1][middle_cell + 1] == player == tic_tac_toe_board[middle_cell + 1][middle_cell + 1] \
-				and tic_tac_toe_board[middle_cell][middle_cell] == self.EMPTY:
-			return middle_cell_value
+	def check_move(self, player, board_list):
+		cell_combination_list = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+		for cell in cell_combination_list:
+			if board_list[cell[0]] == board_list[cell[1]] == player and board_list[cell[2]] == self.EMPTY:
+				return cell[2]+1
+			if board_list[cell[0]] == board_list[cell[2]] == player and board_list[cell[1]] == self.EMPTY:
+				return cell[1]+1
+			if board_list[cell[2]] == board_list[cell[1]] == player and board_list[cell[0]] == self.EMPTY:
+				return cell[0]+1
 		return self.EMPTY_CELL_VALUE
+
 
 	def print_winner(self):
 		self.winner = "You" if(self.check_winner() == self.user) else "Computer"
 		print("%s won the match" % self.winner)
+
+	def get_board_status(self):
+		board_list = []
+		global tic_tac_toe_board
+		for row in tic_tac_toe_board:
+			for cell in row:
+				board_list.append(cell)
+		return board_list
 
 
 # driver code
