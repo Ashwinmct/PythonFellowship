@@ -29,7 +29,8 @@ class SnakeAndLadder:
 
 	def __get_position(self, player_position):
 		dice_value = self.__get_dice_value()
-		return self.__check_option(player_position + dice_value)
+		player_position = player_position + dice_value
+		return self.BOARD_END if player_position >= self.BOARD_END else self.__check_option(player_position + dice_value)
 
 	def __check_option(self, position):
 		ladder_position = {1: 38, 4: 14, 8: 30, 21: 42, 28: 76, 50: 67, 71: 92, 80: 99}
