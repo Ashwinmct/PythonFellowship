@@ -1,4 +1,5 @@
 import random
+from utilities.Input import Input
 
 
 class SnakeAndLadder:
@@ -7,26 +8,29 @@ class SnakeAndLadder:
 	game_status = True
 
 	def __init__(self):
-		self.__play_game()
+		print("Welcome to SnakeAndLadder Game")
+		if Input.get_input("Enter 0 if you want to simulate snake_and_ladder_game", int) == 0:
+			self.__play_game()
+		print("Thank you")
 
 	def __play_game(self):
 		player1_position = self.BOARD_STARTING
-		player2_position = self.BOARD_END
+		player2_position = self.BOARD_STARTING
 		dice_count = 0
 		while [self.game_status]:
 			player1_position = self.__get_position(player1_position)
 			dice_count += 1
 			player2_position = self.__get_position(player2_position)
 			dice_count += 1
-			if player1_position or player2_position is self.BOARD_END:
+			if player1_position == self.BOARD_END or player2_position == self.BOARD_END:
 				break
+		print("Total dice rolls required: ", dice_count)
 
 	def __get_dice_value(self, dice_value=0):
 		dice_value += random.randint(1, 7)
 		if dice_value % 6 == 0:
 			return self.__get_dice_value(dice_value)
 		return dice_value
-
 
 	def __get_position(self, player_position):
 		dice_value = self.__get_dice_value()
