@@ -2,6 +2,7 @@ import enum
 from utilities.Input import Input
 from swapping_nibble.BinaryConversionException import BinaryConversionError
 
+
 class Binary:
 
 	class ConvertingOption(enum.Enum):
@@ -10,6 +11,7 @@ class Binary:
 
 	@staticmethod
 	def to_binary(number):
+		number = Binary.__checkValue(number)
 		binary_string = ''
 		while number > 1:
 			binary_string = str(number % 2) + binary_string
@@ -41,6 +43,13 @@ class Binary:
 			power -= 1
 		return number
 
+	@classmethod
+	def __checkValue(cls, value):
+		try:
+			return int(value)
+		except ValueError:
+			raise BinaryConversionError("Invalid Conversion")
+
 
 #driver code
 if __name__ == "__main__":
@@ -50,3 +59,7 @@ if __name__ == "__main__":
 	binary_number_after_swap = Binary.swap_nibbles(binary_number)
 	print("Binary number after swapping", binary_number_after_swap)
 	print("%s in decimal format" % binary_number_after_swap, Binary.to_Decimal(binary_number_after_swap))
+	try:
+		binary_number = Binary.to_binary("a")
+	except BinaryConversionError as err:
+		print(err)
