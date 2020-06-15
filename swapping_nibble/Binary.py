@@ -16,7 +16,7 @@ class Binary:
 		while number > 1:
 			binary_string = str(number % 2) + binary_string
 			number = number // 2
-		binary_string = '1' + binary_string
+		binary_string = '0' if number == 0 else '1' + binary_string
 		return Binary.convert_to(Binary.ConvertingOption.nibble, binary_string)
 
 	@classmethod
