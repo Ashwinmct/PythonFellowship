@@ -3,126 +3,124 @@ from utilities.input import Input
 
 
 class TicTacToe:
-	cells_occupied_list = []
-	EMPTY = ''
-	user = EMPTY
-	computer = EMPTY
-	player1 = EMPTY
-	player2 = EMPTY
-	NO_WINNER = "-1"
-	winner = NO_WINNER
-	TOTAL_CELLS = 9
-	STARTING_CELL = 1
-	EMPTY_CELL_VALUE = 0
+	__cells_occupied_list = []
+	__EMPTY = ''
+	__user = __EMPTY
+	__computer = __EMPTY
+	__NO_WINNER = "-1"
+	__winner = __NO_WINNER
+	__TOTAL_CELLS = 9
+	__STARTING_CELL = 1
+	__EMPTY_CELL_VALUE = 0
 
 	def __init__(self):
 		if input(
 				"Welcome to Tic Tac Toe \n do you like to play if yes enter 0 else enter any other number or character ") == '0':
-			self.play_game()
+			self.__play_game()
 		print("Thank you")
 
-	def reset_board(self):
+	def __reset_board(self):
 		global tic_tac_toe_board
 		tic_tac_toe_board = [['', '', ''], ['', '', ''], ['', '', '']]
 
-	def play_game(self):
-		self.initialise_game()
+	def __play_game(self):
+		self.__initialise_game()
 		print("Game Started")
-		self.print_board()
-		for cell in range(self.TOTAL_CELLS):
+		self.__print_board()
+		for cell in range(self.__TOTAL_CELLS):
 			if cell % 2 == 0:
-				self.store_board(self.get_input(self.player1), self.player1)
+				self.__store_board(self.__get_input(player1), player1)
 			else:
-				self.store_board(self.get_input(self.player2), self.player2)
-			self.print_board()
-			if self.check_winner() != self.NO_WINNER:
-				self.print_winner()
+				self.__store_board(self.__get_input(player2), player2)
+			self.__print_board()
+			if self.__check_winner() != self.__NO_WINNER:
+				self.__print_winner()
 				break
-		if self.winner == self.NO_WINNER:
+		if self.__winner == self.__NO_WINNER:
 			print("Match Tie")
 
-	def print_board(self):
+	def __print_board(self):
 		global tic_tac_toe_board
 		print("TicTacToe Board")
 		for row in range(len(tic_tac_toe_board)):
 			print("%s || %s || %s" % (tic_tac_toe_board[row][0], tic_tac_toe_board[row][1], tic_tac_toe_board[row][2]))
 
-	def initialise_game(self):
-		self.reset_board()
+	def __initialise_game(self):
+		self.__reset_board()
 		print("Welcome to the game \nBoard Layout: \n 1 || 2 || 3 \n 4 || 5 || 6 \n 7 || 8 || 9 "
 		      "\nEnter position you want as shown as above")
-		self.set_values()
+		self.__set_values()
 
-	def set_values(self):
+	def __set_values(self):
 		if random.randint(0, 1) == 0:
-			self.computer = 'x'
-			self.user = 'o'
+			self.__computer = 'x'
+			self.__user = 'o'
 		else:
-			self.computer = 'o'
-			self.user = 'x'
-		print("You will be '%s' \n Computer will be '%s'" % (self.user, self.computer))
-		self.toss_game()
+			self.__computer = 'o'
+			self.__user = 'x'
+		print("You will be '%s' \n Computer will be '%s'" % (self.__user, self.__computer))
+		self.__toss_game()
 
-	def toss_game(self):
+	def __toss_game(self):
 		global player1, player2
 		user_choice = Input.get_input("Enter your choice to toss '0' for HEAD or another number for Tail ", int)
 		toss_result = random.randint(0, 1)
 		if user_choice == toss_result:
 			print('YOU won the toss')
-			self.player1 = self.user
-			self.player2 = self.computer
+			player1 = self.__user
+			player2 = self.__computer
 			return
 		else:
 			print("COMPUTER won the toss")
-			self.player1 = self.computer
-			self.player2 = self.user
+			player1 = self.__computer
+			player2 = self.__user
 
-	def check_winner(self):
+	def __check_winner(self):
 		###check rows
 		for row in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[row][0] == tic_tac_toe_board[row][1] == tic_tac_toe_board[row][2] \
-					and tic_tac_toe_board[row][0] != '':
+					and tic_tac_toe_board[row][0] != self.__EMPTY:
 				return tic_tac_toe_board[row][0]
 
 		###check columns
 		for column in range(len(tic_tac_toe_board)):
 			if tic_tac_toe_board[0][column] == tic_tac_toe_board[1][column] == tic_tac_toe_board[2][column] \
-					and tic_tac_toe_board[0][column] != '':
+					and tic_tac_toe_board[0][column] != self.__EMPTY:
 				return tic_tac_toe_board[0][column]
 
 		###check principal diagonal
 		if tic_tac_toe_board[0][0] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][2] \
-				and tic_tac_toe_board[1][1] != '':
+				and tic_tac_toe_board[1][1] != self.__EMPTY:
 			return tic_tac_toe_board[1][1]
 
 		###check secondary diagonal
 		if tic_tac_toe_board[0][2] == tic_tac_toe_board[1][1] == tic_tac_toe_board[2][0] \
-				and tic_tac_toe_board[1][1] != '':
+				and tic_tac_toe_board[1][1] != self.__EMPTY:
 			return tic_tac_toe_board[1][1]
 
 		# if no winning combination is found
-		return self.NO_WINNER
+		return self.__NO_WINNER
 
-	def get_input(self, player):
-		if self.user == player:
-			return self.get_user_input()
-		return self.generate_computer_input()
+	def __get_input(self, player):
+		if self.__user == player:
+			return self.__get_user_input()
+		return self.__generate_computer_input()
 
-	def get_user_input(self):
+	def __get_user_input(self):
 		user_input = Input.get_input("Enter the position you want ", int)
 		condition_dictionary = {
-			user_input > self.TOTAL_CELLS or user_input < self.STARTING_CELL:
+			user_input > self.__TOTAL_CELLS or user_input < self.__STARTING_CELL:
 				"Entered Incorrect option \nPlease Enter Again",
-			self.cells_occupied_list.__contains__(user_input):
+			self.__cells_occupied_list.__contains__(user_input):
 				"Entered Position Already Occupied \nPlease Enter Again "}
 		for condition, message in condition_dictionary.items():
 			if condition is True:
 				print(message)
-				return self.get_user_input()
-		self.cells_occupied_list.append(user_input)
+				return self.__get_user_input()
+		self.__cells_occupied_list.append(user_input)
 		return user_input
 
-	def store_board(self, position, player):
+	def __store_board(self, position, player):
 		global tic_tac_toe_board
 		cell_position = (position % 3) - 1
 		if position <= 3:
@@ -135,40 +133,40 @@ class TicTacToe:
 			tic_tac_toe_board[2][cell_position] = player
 			return
 
-	def generate_computer_input(self):
-		computer_move = self.get_available_move()
-		self.cells_occupied_list.append(computer_move)
+	def __generate_computer_input(self):
+		computer_move = self.__get_available_move()
+		self.__cells_occupied_list.append(computer_move)
 		return computer_move
 
-	def get_available_move(self):
+	def __get_available_move(self):
 		cell_priority_list = [1, 3, 7, 9, 5, 2, 4, 6, 8]
-		players = [self.computer, self.user]
-		board_details_list = self.get_board_status()
+		players = [self.__computer, self.__user]
+		board_details_list = self.__get_board_status()
 		for player in players:
-			move = self.check_move(player, board_details_list)
-			if not self.cells_occupied_list.__contains__(move) and move != self.EMPTY_CELL_VALUE:
+			move = self.__check_move(player, board_details_list)
+			if not self.__cells_occupied_list.__contains__(move) and move != self.__EMPTY_CELL_VALUE:
 				return move
 
 		for cell in cell_priority_list:
-			if not self.cells_occupied_list.__contains__(cell):
+			if not self.__cells_occupied_list.__contains__(cell):
 				return cell
 
-	def check_move(self, player, board_list):
+	def __check_move(self, player, board_list):
 		cell_combination_list = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 		for cell in cell_combination_list:
-			if board_list[cell[0]] == board_list[cell[1]] == player and board_list[cell[2]] == self.EMPTY:
+			if board_list[cell[0]] == board_list[cell[1]] == player and board_list[cell[2]] == self.__EMPTY:
 				return cell[2]+1
-			if board_list[cell[0]] == board_list[cell[2]] == player and board_list[cell[1]] == self.EMPTY:
+			if board_list[cell[0]] == board_list[cell[2]] == player and board_list[cell[1]] == self.__EMPTY:
 				return cell[1]+1
-			if board_list[cell[2]] == board_list[cell[1]] == player and board_list[cell[0]] == self.EMPTY:
+			if board_list[cell[2]] == board_list[cell[1]] == player and board_list[cell[0]] == self.__EMPTY:
 				return cell[0]+1
-		return self.EMPTY_CELL_VALUE
+		return self.__EMPTY_CELL_VALUE
 
-	def print_winner(self):
-		self.winner = "You" if(self.check_winner() == self.user) else "Computer"
-		print("%s won the match" % self.winner)
+	def __print_winner(self):
+		self.__winner = "You" if(self.__check_winner() == self.__user) else "Computer"
+		print("%s won the match" % self.__winner)
 
-	def get_board_status(self):
+	def __get_board_status(self):
 		board_list = []
 		global tic_tac_toe_board
 		for row in tic_tac_toe_board:
