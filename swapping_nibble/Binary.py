@@ -11,23 +11,24 @@ class Binary:
 
 	@staticmethod
 	def to_binary(number):
-		number = Binary.__checkValue(number)
+		Binary.__checkValue(number)
 		binary_string = ''
 		while number > 1:
 			binary_string = str(number % 2) + binary_string
 			number = number // 2
-		binary_string = '0' if number == 0 else '1' + binary_string
-		return Binary.convert_to(Binary.ConvertingOption.nibble, binary_string)
+		binary_string = '0' if number <= 0 else '1' + binary_string
+		return Binary.__convert_to(Binary.ConvertingOption.nibble, binary_string)
 
 	@classmethod
 	def swap_nibbles(cls, binary_number):
-		given_binary_number_in_byte = Binary.convert_to(Binary.ConvertingOption.byte, binary_number)
+		Binary.__checkValue(binary_number, 2)
+		given_binary_number_in_byte = Binary.__convert_to(Binary.ConvertingOption.byte, binary_number)
 		splitting_value = len(given_binary_number_in_byte) // 2
 		swapped_number = given_binary_number_in_byte[splitting_value::] + given_binary_number_in_byte[:splitting_value:]
 		return swapped_number
 
 	@classmethod
-	def convert_to(cls, binary_type, binary_number):
+	def __convert_to(cls, binary_type, binary_number):
 		TYPE_CONVERSION_DETAILS = {Binary.ConvertingOption.byte: 8, Binary.ConvertingOption.nibble: 4}
 		conversion_value = TYPE_CONVERSION_DETAILS.get(binary_type)
 		if len(binary_number) % conversion_value != 0:
@@ -36,6 +37,7 @@ class Binary:
 
 	@classmethod
 	def to_Decimal(cls, binary_number):
+		Binary.__checkValue(binary_number, 2)
 		number = 0
 		power = len(binary_number) - 1
 		for value in binary_number:
@@ -44,11 +46,11 @@ class Binary:
 		return number
 
 	@classmethod
-	def __checkValue(cls, value):
+	def __checkValue(cls, value, base=10):
 		try:
-			return int(value)
+			return int(str(value), base)
 		except ValueError:
-			raise BinaryConversionError("Invalid Conversion")
+			raise BinaryConversionError("Invalid Value")
 
 
 #driver code
@@ -61,5 +63,15 @@ if __name__ == "__main__":
 	print("%s in decimal format" % binary_number_after_swap, Binary.to_Decimal(binary_number_after_swap))
 	try:
 		binary_number = Binary.to_binary("a")
+	except BinaryConversionError as err:
+		print(err)
+
+	try:
+		binary_number = Binary.swap_nibbles("a")
+	except BinaryConversionError as err:
+		print(err)
+
+	try:
+		binary_number = Binary.to_Decimal("a")
 	except BinaryConversionError as err:
 		print(err)
