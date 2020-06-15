@@ -11,7 +11,7 @@ class TicTacToe:
 	__winner = __NO_WINNER
 	__TOTAL_CELLS = 9
 	__STARTING_CELL = 1
-	__EMPTY_CELL_VALUE = 0
+	__NO_CELL_VALUE = 0
 
 	def __init__(self):
 		if input(
@@ -144,23 +144,22 @@ class TicTacToe:
 		board_details_list = self.__get_board_status()
 		for player in players:
 			move = self.__check_move(player, board_details_list)
-			if not self.__cells_occupied_list.__contains__(move) and move != self.__EMPTY_CELL_VALUE:
+			if not self.__cells_occupied_list.__contains__(move) and move != self.__NO_CELL_VALUE:
 				return move
 
 		for cell in cell_priority_list:
-			if not self.__cells_occupied_list.__contains__(cell):
+			if not cell in self.__cells_occupied_list:
 				return cell
 
 	def __check_move(self, player, board_list):
 		cell_combination_list = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-		for cell in cell_combination_list:
-			if board_list[cell[0]] == board_list[cell[1]] == player and board_list[cell[2]] == self.__EMPTY:
-				return cell[2]+1
-			if board_list[cell[0]] == board_list[cell[2]] == player and board_list[cell[1]] == self.__EMPTY:
-				return cell[1]+1
-			if board_list[cell[2]] == board_list[cell[1]] == player and board_list[cell[0]] == self.__EMPTY:
-				return cell[0]+1
-		return self.__EMPTY_CELL_VALUE
+		for cell_list in cell_combination_list:
+			if(len(list(filter(lambda cell: board_list[cell] == player, cell_list)))) == 2:
+				empty_cell = list(filter(lambda cell: board_list[cell] == player, cell_list))
+				if len(empty_cell) == 1:
+					return empty_cell + self.__STARTING_CELL
+
+		return self.__NO_CELL_VALUE
 
 	def __print_winner(self):
 		self.__winner = "You" if(self.__check_winner() == self.__user) else "Computer"
