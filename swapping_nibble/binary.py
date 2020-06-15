@@ -1,6 +1,6 @@
 import enum
 from utilities.Input import Input
-from swapping_nibble.BinaryConversionException import BinaryConversionError
+from swapping_nibble.binary_conversion_exception import BinaryConversionError
 
 
 class Binary:
@@ -11,7 +11,7 @@ class Binary:
 
 	@staticmethod
 	def to_binary(number):
-		Binary.__checkValue(number)
+		Binary.__check_value(number)
 		binary_string = ''
 		while number > 1:
 			binary_string = str(number % 2) + binary_string
@@ -21,7 +21,7 @@ class Binary:
 
 	@classmethod
 	def swap_nibbles(cls, binary_number):
-		Binary.__checkValue(binary_number, 2)
+		Binary.__check_value(binary_number, 2)
 		given_binary_number_in_byte = Binary.__convert_to(Binary.ConvertingOption.byte, binary_number)
 		splitting_value = len(given_binary_number_in_byte) // 2
 		swapped_number = given_binary_number_in_byte[splitting_value::] + given_binary_number_in_byte[:splitting_value:]
@@ -36,8 +36,8 @@ class Binary:
 		return binary_number
 
 	@classmethod
-	def to_Decimal(cls, binary_number):
-		Binary.__checkValue(binary_number, 2)
+	def to_decimal(cls, binary_number):
+		Binary.__check_value(binary_number, 2)
 		number = 0
 		power = len(binary_number) - 1
 		for value in binary_number:
@@ -46,7 +46,7 @@ class Binary:
 		return number
 
 	@classmethod
-	def __checkValue(cls, value, base=10):
+	def __check_value(cls, value, base=10):
 		try:
 			return int(str(value), base)
 		except ValueError:
@@ -60,7 +60,7 @@ if __name__ == "__main__":
 	print("%d in binary value" % number, binary_number)
 	binary_number_after_swap = Binary.swap_nibbles(binary_number)
 	print("Binary number after swapping", binary_number_after_swap)
-	print("%s in decimal format" % binary_number_after_swap, Binary.to_Decimal(binary_number_after_swap))
+	print("%s in decimal format" % binary_number_after_swap, Binary.to_decimal(binary_number_after_swap))
 	try:
 		binary_number = Binary.to_binary("a")
 	except BinaryConversionError as err:
@@ -72,6 +72,6 @@ if __name__ == "__main__":
 		print(err)
 
 	try:
-		binary_number = Binary.to_Decimal("a")
+		binary_number = Binary.to_decimal("a")
 	except BinaryConversionError as err:
 		print(err)

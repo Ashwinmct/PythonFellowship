@@ -1,5 +1,3 @@
-import enum
-
 
 class BinaryConversionError(Exception):
 
