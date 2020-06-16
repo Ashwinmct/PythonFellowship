@@ -155,9 +155,9 @@ class TicTacToe:
 		cell_combination_list = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 		for cell_list in cell_combination_list:
 			if(len(list(filter(lambda cell: board_list[cell] == player, cell_list)))) == 2:
-				empty_cell = list(filter(lambda cell: board_list[cell] == player, cell_list))
+				empty_cell = list(filter(lambda cell: board_list[cell] == self.__EMPTY, cell_list))
 				if len(empty_cell) == 1:
-					return empty_cell + self.__STARTING_CELL
+					return empty_cell[0] + self.__STARTING_CELL
 
 		return self.__NO_CELL_VALUE
 
