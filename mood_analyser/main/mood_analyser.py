@@ -1,5 +1,9 @@
 class MoodAnalyser:
-	def analyse_mood(self, mood):
-		if "sad" in mood.lower():
+
+	def __init__(self, message):
+		self.message = message
+
+	def analyse_mood(self):
+		if "sad" in self.message.lower():
 			return "SAD"
 		return "HAPPY"
