@@ -47,3 +47,33 @@ class TestLengthData:
 		length_data1 = LengthData(MeasurementUnit.INCH, 12)
 		length_data2 = LengthData(MeasurementUnit.FEET, 1)
 		assert length_data2.equals(length_data1)
+
+	def test_given_feet_value_with_respective_yard_value_when_equals_should_return_true(self):
+		length_data1 = LengthData(MeasurementUnit.FEET, 3)
+		length_data2 = LengthData(MeasurementUnit.YARD, 1)
+		assert length_data2.equals(length_data1)
+
+	def test_given_single_unit_feet_and_yard_when_equalized_should_return_false(self):
+		length_data1 = LengthData(MeasurementUnit.YARD, 1)
+		length_data2 = LengthData(MeasurementUnit.FEET, 1)
+		assert length_data2.equals(length_data1) is False
+
+	def test_given_single_unit_inch_and_yard_when_equalized_should_return_false(self):
+		length_data1 = LengthData(MeasurementUnit.INCH, 1)
+		length_data2 = LengthData(MeasurementUnit.FEET, 1)
+		assert length_data2.equals(length_data1) is False
+
+	def test_given_yard_value_with_respective_inch_value_when_equals_should_return_true(self):
+		length_data1 = LengthData(MeasurementUnit.INCH, 36)
+		length_data2 = LengthData(MeasurementUnit.YARD, 1)
+		assert length_data2.equals(length_data1)
+
+	def test_given_inch_value_with_respective_yard_value_when_equals_should_return_true(self):
+		length_data1 = LengthData(MeasurementUnit.INCH, 36)
+		length_data2 = LengthData(MeasurementUnit.YARD, 1)
+		assert length_data1.equals(length_data2)
+
+	def test_given_yard_value_with_respective_feet_value_when_equals_should_return_true(self):
+		length_data1 = LengthData(MeasurementUnit.FEET, 3)
+		length_data2 = LengthData(MeasurementUnit.YARD, 1)
+		assert length_data2.equals(length_data1)
