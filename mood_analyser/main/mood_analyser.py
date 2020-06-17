@@ -4,6 +4,9 @@ class MoodAnalyser:
 		self.message = message
 
 	def analyse_mood(self):
-		if "sad" in self.message.lower():
-			return "SAD"
-		return "HAPPY"
+		try:
+			if "sad" in self.message.lower():
+				return "SAD"
+			return "HAPPY"
+		except AttributeError:
+			return "HAPPY"

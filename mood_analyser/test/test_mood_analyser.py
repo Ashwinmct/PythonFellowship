@@ -21,3 +21,9 @@ class TestMoodAnalyser:
 		expected_mood = 'HAPPY'
 		calculated_mood = mood_analyser.analyse_mood()
 		assert expected_mood == calculated_mood
+
+	def test_given_None_value_when_analysed_should_return_HAPPY(self):
+		mood_analyser = MoodAnalyser(None)
+		expected_mood = 'HAPPY'
+		calculated_mood = mood_analyser.analyse_mood()
+		assert expected_mood == calculated_mood
