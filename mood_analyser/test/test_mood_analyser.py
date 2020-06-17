@@ -1,0 +1,17 @@
+import pytest
+from mood_analyser.main.mood_analyser import MoodAnalyser
+
+
+class TestMoodAnalyser:
+
+	def test_given_string_with_the_word_Sad_when_analysed_should_return_SAD(self):
+		mood_analyser = MoodAnalyser()
+		expected_mood = 'SAD'
+		calculated_mood = mood_analyser.analyse_mood("I am in Sad Mood")
+		assert expected_mood == calculated_mood
+
+	def test_given_string_without_the_word_Sad_when_analysed_should_return_HAPPY(self):
+		mood_analyser = MoodAnalyser()
+		expected_mood = 'HAPPY'
+		calculated_mood = mood_analyser.analyse_mood("I am in Happy Mood")
+		assert expected_mood == calculated_mood
