@@ -7,9 +7,9 @@ class TestMeasurement:
 	def test_for_given_two_measurements_when_added_should_return_added_value(self):
 		measurement1 = LengthData(MeasurementUnit.INCH, 1)
 		measurement2 = LengthData(MeasurementUnit.YARD, 1)
-		expected_value = 37
+		expected_value = LengthData(MeasurementUnit.INCH, 37)
 		calculated_value = measurement1.__add__(measurement2)
-		assert calculated_value == expected_value
+		assert calculated_value.equals(expected_value)
 
 	def test_for_given_two_measurements_of_different_type_when_added_should_throw_exception(self):
 		try:

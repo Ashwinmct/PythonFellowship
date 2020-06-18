@@ -82,3 +82,31 @@ class TestLengthData:
 		length_data1 = LengthData(MeasurementUnit.INCH, 2)
 		length_data2 = LengthData(MeasurementUnit.CENTIMETER, 5)
 		assert length_data2.equals(length_data1)
+
+	def test_given_lengths_in_inch_when_added_should_return_added_length_in_inches(self):
+		length1 = LengthData(MeasurementUnit.INCH, 2)
+		length2 = LengthData(MeasurementUnit.INCH, 2)
+		expected_length_in_inch = LengthData(MeasurementUnit.INCH, 4)
+		calculated_length_in_inch = length1.__add__(length2)
+		assert expected_length_in_inch.equals(calculated_length_in_inch)
+
+	def test_given_lengths_in_inch_and_feet_when_added_should_return_added_length_in_inches(self):
+		length1 = LengthData(MeasurementUnit.FEET, 1)
+		length2 = LengthData(MeasurementUnit.INCH, 2)
+		expected_length_in_inch = LengthData(MeasurementUnit.INCH, 14)
+		calculated_length_in_inch = length1.__add__(length2)
+		assert expected_length_in_inch.equals(calculated_length_in_inch)
+
+	def test_given_lengths_in_feet_when_added_should_return_added_length_in_inches(self):
+		length1 = LengthData(MeasurementUnit.FEET, 1)
+		length2 = LengthData(MeasurementUnit.FEET, 1)
+		expected_length_in_inch = LengthData(MeasurementUnit.INCH, 24)
+		calculated_length_in_inch = length1.__add__(length2)
+		assert expected_length_in_inch.equals(calculated_length_in_inch)
+
+	def test_given_lengths_in_inch_and_centimeter_when_added_should_return_added_length_in_inches(self):
+		length1 = LengthData(MeasurementUnit.INCH, 2)
+		length2 = LengthData(MeasurementUnit.CENTIMETER, 2.5)
+		expected_length_in_inch = LengthData(MeasurementUnit.INCH, 3)
+		calculated_length_in_inch = length1.__add__(length2)
+		assert expected_length_in_inch.equals(calculated_length_in_inch)
