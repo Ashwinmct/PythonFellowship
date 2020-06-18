@@ -4,7 +4,7 @@ from .basic_quantity import BasicQuantity
 from .measurement_units import MeasurementUnit
 
 
-class MassData(Measurement):
+class Mass(Measurement):
 	quantity_type = BasicQuantity.MASS
 	base_unit = MeasurementUnit.KILO_GRAM
 
@@ -14,4 +14,4 @@ class MassData(Measurement):
 		super().__init__(unit, value)
 
 	def __add__(self, other):
-		return MassData(self.base_unit, super().__add__(other))
+		return Mass(self.base_unit, super().__add__(other))

@@ -4,7 +4,7 @@ from .measurement_units import BasicQuantity
 from .measurement_exception import MeasurementError
 
 
-class TemperatureData(Measurement):
+class Temperature(Measurement):
 	quantity_type = BasicQuantity.TEMPERATURE
 
 	def __init__(self, unit, value):

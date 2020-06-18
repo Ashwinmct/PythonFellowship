@@ -4,7 +4,7 @@ from .basic_quantity import BasicQuantity
 from .measurement_units import MeasurementUnit
 
 
-class VolumeData(Measurement):
+class Volume(Measurement):
 	quantity_type = BasicQuantity.VOLUME
 	basic_unit = MeasurementUnit.LITRE
 
@@ -14,4 +14,4 @@ class VolumeData(Measurement):
 		super().__init__(unit, value)
 
 	def __add__(self, other):
-		return VolumeData(self.basic_unit, super().__add__(other))
+		return Volume(self.basic_unit, super().__add__(other))

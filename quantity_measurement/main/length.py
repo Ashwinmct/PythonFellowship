@@ -4,7 +4,7 @@ from .measurement_exception import MeasurementError
 from .basic_quantity import BasicQuantity
 
 
-class LengthData(Measurement):
+class Length(Measurement):
 	basic_unit = MeasurementUnit.INCH
 	quantity_type = BasicQuantity.LENGTH
 
@@ -14,4 +14,4 @@ class LengthData(Measurement):
 		super().__init__(unit, value)
 
 	def __add__(self, other):
-		return LengthData(self.basic_unit, super().__add__(other))
+		return Length(self.basic_unit, super().__add__(other))
