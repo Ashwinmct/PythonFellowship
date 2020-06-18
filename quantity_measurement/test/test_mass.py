@@ -44,3 +44,10 @@ class TestMass:
 		mass1 = MassData(MeasurementUnit.KILO_GRAM, 1000)
 		mass2 = MassData(MeasurementUnit.TONNE, 1)
 		assert mass1.equals(mass2)
+
+	def test_given_mass_data_in_g_and_tonne_unit_when_added_should_return_result_in_unit_of_kilo_grams(self):
+		mass1 = MassData(MeasurementUnit.GRAM, 1000)
+		mass2 = MassData(MeasurementUnit.TONNE, 1)
+		expected_mass = MassData(MeasurementUnit.KILO_GRAM, 1001)
+		calculated_mass = mass1.__add__(mass2)
+		assert expected_mass.equals(calculated_mass)
