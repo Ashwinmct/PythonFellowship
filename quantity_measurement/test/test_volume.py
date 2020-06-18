@@ -45,5 +45,16 @@ class TestVolume:
 		volume2 = VolumeData(MeasurementUnit.MILLI_LITRE, 1000)
 		assert volume1.equals(volume2)
 
+	def test_given_volume_in_gallon_and_litres_when_added_should_return_the_result_in_unit_of_litre(self):
+		volume1 = VolumeData(MeasurementUnit.LITRE, 3.78)
+		volume2 = VolumeData(MeasurementUnit.GALLON, 1)
+		expected_volume = VolumeData(MeasurementUnit.LITRE, 7.56)
+		calculated_volume = volume2.__add__(volume1)
+		assert expected_volume.equals(calculated_volume)
 
-
+	def test_given_volume_in_millilitre_and_litres_when_added_should_return_the_result_in_unit_of_litre(self):
+		volume1 = VolumeData(MeasurementUnit.LITRE, 1)
+		volume2 = VolumeData(MeasurementUnit.MILLI_LITRE, 1000)
+		expected_volume = VolumeData(MeasurementUnit.LITRE, 2)
+		calculated_volume = volume2.__add__(volume1)
+		assert expected_volume.equals(calculated_volume)
