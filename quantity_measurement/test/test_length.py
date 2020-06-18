@@ -77,3 +77,8 @@ class TestLengthData:
 		length_data1 = LengthData(MeasurementUnit.FEET, 3)
 		length_data2 = LengthData(MeasurementUnit.YARD, 1)
 		assert length_data2.equals(length_data1)
+
+	def test_given_length_in_centimeter_and_respective_length_in_inches_when_equals_should_return_true(self):
+		length_data1 = LengthData(MeasurementUnit.INCH, 2)
+		length_data2 = LengthData(MeasurementUnit.CENTIMETER, 5)
+		assert length_data2.equals(length_data1)
