@@ -1,4 +1,5 @@
 import abc
+from .measurement_exception import MeasurementError
 
 
 class Measurement(abc.ABC):
@@ -25,4 +26,6 @@ class Measurement(abc.ABC):
 		return obj.value * obj.unit.get_basic_unit_conversion_factor()
 
 	def __add__(self, other):
+		if not isinstance(other,Measurement):
+			raise MeasurementError(MeasurementError.ExceptionType.INVALID_ADDITION)
 		return self.convert_to_basic_unit_value(self) + self.convert_to_basic_unit_value(other)
