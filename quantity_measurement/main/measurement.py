@@ -23,3 +23,6 @@ class Measurement(abc.ABC):
 	@staticmethod
 	def convert_to_basic_unit_value(obj):
 		return obj.value * obj.unit.get_basic_unit_conversion_factor()
+
+	def __add__(self, other):
+		return self.convert_to_basic_unit_value(self) + self.convert_to_basic_unit_value(other)
