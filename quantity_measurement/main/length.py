@@ -15,4 +15,4 @@ class LengthData(Measurement):
 		super().__init__(unit, value)
 
 	def __add__(self, other):
-		return LengthData(self.basic_unit ,super().__add__(other))
+		return LengthData(self.basic_unit, super().__add__(other))

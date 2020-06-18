@@ -1,5 +1,4 @@
 from .measurement import Measurement
-from .measurement_units import MeasurementUnit
 from .measurement_exception import MeasurementError
 from .base_units import BaseUnit
 

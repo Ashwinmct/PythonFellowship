@@ -12,7 +12,7 @@ class MeasurementUnit(enum.Enum):
 	#for volume
 	GALLON = {"type": BaseUnit.VOLUME, "BasicUnitConversionFactor": 3.78}
 	LITRE = {"type": BaseUnit.VOLUME, "BasicUnitConversionFactor": 1}
-	MILLI_LITRE = {"type": BaseUnit.VOLUME, "BasicUnitConversionFactor": 1000}
+	MILLI_LITRE = {"type": BaseUnit.VOLUME, "BasicUnitConversionFactor": 0.001}
 
 	def get_basic_unit_conversion_factor(self):
 		return self.value.get("BasicUnitConversionFactor")

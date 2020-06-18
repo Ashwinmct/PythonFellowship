@@ -9,7 +9,7 @@ class TestVolume:
 		volume2 = VolumeData(MeasurementUnit.LITRE, 1)
 		assert volume1.equals(volume2)
 
-	def test_given_volume_data_with_same_unit_and_differnt_value_when_equalised_should_return_false(self):
+	def test_given_volume_data_with_same_unit_and_different_value_when_equalised_should_return_false(self):
 		volume1 = VolumeData(MeasurementUnit.LITRE, 10)
 		volume2 = VolumeData(MeasurementUnit.LITRE, 1)
 		assert volume1.equals(volume2) is False
@@ -34,3 +34,16 @@ class TestVolume:
 			VolumeData(MeasurementUnit.CENTIMETER, 2)
 		except MeasurementError as err:
 			assert MeasurementError.ExceptionType.INVALID_UNIT == err.exception_type
+
+	def test_given_volume_in_litre_and_its_respective_volume_in_gallon_when_equalised_should_return_true(self):
+		volume1 = VolumeData(MeasurementUnit.LITRE, 3.78)
+		volume2 = VolumeData(MeasurementUnit.GALLON, 1)
+		assert volume1.equals(volume2)
+
+	def test_given_volume_in_litre_and_its_respective_volume_in_milli_litre_when_equalised_should_return_true(self):
+		volume1 = VolumeData(MeasurementUnit.LITRE, 1)
+		volume2 = VolumeData(MeasurementUnit.MILLI_LITRE, 1000)
+		assert volume1.equals(volume2)
+
+
+
