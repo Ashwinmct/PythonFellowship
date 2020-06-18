@@ -1,11 +1,11 @@
 from .measurement import Measurement
 from .measurement_exception import MeasurementError
-from .base_units import BaseUnit
+from .basic_quantity import BasicQuantity
 from .measurement_units import MeasurementUnit
 
 
 class VolumeData(Measurement):
-	quantity_type = BaseUnit.VOLUME
+	quantity_type = BasicQuantity.VOLUME
 	basic_unit = MeasurementUnit.LITRE
 
 	def __init__(self, unit, value):

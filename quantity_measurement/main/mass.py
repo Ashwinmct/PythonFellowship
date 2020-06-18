@@ -1,11 +1,11 @@
 from .measurement import Measurement
 from .measurement_exception import MeasurementError
-from .base_units import BaseUnit
+from .basic_quantity import BasicQuantity
 from .measurement_units import MeasurementUnit
 
 
 class MassData(Measurement):
-	quantity_type = BaseUnit.MASS
+	quantity_type = BasicQuantity.MASS
 	base_unit = MeasurementUnit.KILO_GRAM
 
 	def __init__(self, unit, value):
