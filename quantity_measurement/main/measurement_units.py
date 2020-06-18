@@ -1,10 +1,8 @@
 import enum
+from .base_units import BaseUnit
 
 
 class MeasurementUnit(enum.Enum):
-	class BaseUnit(enum.Enum):
-		LENGTH = 1
-		VOLUME = 2
 
 	#for length
 	INCH = {"type": BaseUnit.LENGTH, "BasicUnitConversionFactor": 1}
@@ -18,3 +16,6 @@ class MeasurementUnit(enum.Enum):
 
 	def get_basic_unit_conversion_factor(self):
 		return self.value.get("BasicUnitConversionFactor")
+
+	def get_base_unit(self):
+		return self.value.get("type")

@@ -1,5 +1,6 @@
 from quantity_measurement.main.length import LengthData
 from quantity_measurement.main.measurement_units import MeasurementUnit
+from quantity_measurement.main.measurement_exception import MeasurementError
 
 
 class TestLengthData:
@@ -110,3 +111,9 @@ class TestLengthData:
 		expected_length_in_inch = LengthData(MeasurementUnit.INCH, 3)
 		calculated_length_in_inch = length1.__add__(length2)
 		assert expected_length_in_inch.equals(calculated_length_in_inch)
+
+	def test_given_length_value_with_invalid_unit_should_throw_exception(self):
+		try:
+			LengthData(MeasurementUnit.GALLON, 2)
+		except MeasurementError as err:
+			assert MeasurementError.ExceptionType.INVALID_UNIT == err.exception_type
