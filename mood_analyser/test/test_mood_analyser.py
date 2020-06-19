@@ -1,4 +1,3 @@
-import pytest
 from mood_analyser.main.mood_analyser import MoodAnalyser
 from mood_analyser.main.mood_analysis_exception import MoodAnalysisException
 
