@@ -26,3 +26,8 @@ class TestPinCodeValidation:
 		pin_code_validator = PinCodeValidator()
 		pin_code = "000088"
 		assert pin_code_validator.validate(pin_code) is False
+
+	def test_given_pin_code_with_space_in_between_when_validated_should_return_true(self):
+		pin_code_validator = PinCodeValidator()
+		pin_code = "400 088"
+		assert pin_code_validator.validate(pin_code)
