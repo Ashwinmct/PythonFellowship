@@ -21,3 +21,8 @@ class TestPinCodeValidation:
 		pin_code_validator = PinCodeValidator()
 		pin_code = "asd123"
 		assert pin_code_validator.validate(pin_code) is False
+
+	def test_given_pin_code_starts_with_zero_when_validated_should_return_false(self):
+		pin_code_validator = PinCodeValidator()
+		pin_code = "000088"
+		assert pin_code_validator.validate(pin_code) is False
