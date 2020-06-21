@@ -3,7 +3,7 @@ from .patient import Patient
 from .doctor import Doctor
 
 
-class ClinicFileHandler:
+class ClinicFileManager:
 
 	def convert_to_list(self,json_string):
 		person_list = []
