@@ -34,3 +34,9 @@ class TestClinicManager:
 	def test_given_patient_id_when_searched_by_if_existed_should_return_true(self):
 		clinic_manager = ClinicManager()
 		assert clinic_manager.search_by(PersonType.PATIENT, ClinicManager.Option.ID, "P001")
+
+	def test_given_patient_should_get_appointment_from_the_doctor(self):
+		clinic_manager = ClinicManager()
+		expected_message = "appointment fixed"
+		message_got = clinic_manager.fix_appointment("Ashwin", "Sarath")
+		assert expected_message == message_got

@@ -8,7 +8,7 @@ class TestClinicFileManager:
 
 	def test_given_doctors_details_file_when_loaded_should_give_exact_amount_of_data(self):
 		clinic_manager = ClinicFileManager()
-		expected_count = 8
+		expected_count = 3
 		doctors_data_count = clinic_manager.open(PersonType.DOCTOR, self.DOCTORS_DETAILS_FILE_PATH).__len__()
 		assert expected_count == doctors_data_count
 

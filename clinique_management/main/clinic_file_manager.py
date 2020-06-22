@@ -7,10 +7,10 @@ from .doctor import Doctor
 class ClinicFileManager:
 
 	def convert_to_list(self, person_type, json_string):
-		person_list = []
+		person_details = []
 		for person in json_string:
-			person_list.append(self.store_to_object(person_type, person))
-		return person_list
+			person_details.append(self.store_to_object(person_type, person))
+		return person_details
 
 	def open(self, person_type, file_path):
 		with open(file_path) as f:

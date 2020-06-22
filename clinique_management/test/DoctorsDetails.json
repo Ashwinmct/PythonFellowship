@@ -8,51 +8,16 @@
  },
  {
    "Sno": 2,
-   "Name": "Tony",
-   "ID": "DOC002",
-   "Specialisation": "Opthology",
+   "Name": "Stark",
+   "ID": "DOC003",
+   "Specialisation": "Cardiology",
    "Availability": "AM"
  },
  {
    "Sno": 3,
-   "Name": "Stark",
-   "ID": "DOC003",
-   "Specialisation": "Cardiology",
-   "Availability": "PM"
- },
- {
-   "Sno": 4,
-   "Name": "Kaththi",
-   "ID": "DOC004",
-   "Specialisation": "BDS",
-   "Availability": "Both"
- },
- {
-   "Sno": 5,
-   "Name": "Kathir",
-   "ID": "DOC005",
-   "Specialisation": "Psycology",
-   "Availability": "Both"
- },
- {
-   "Sno": 6,
    "Name": "Strange",
    "ID": "DOC006",
    "Specialisation": "Surgeon",
    "Availability": "PM"
- },
- {
-   "Sno": 7,
-   "Name": "Mswamy",
-   "ID": "DOC007",
-   "Specialisation": "Nuerologist",
-   "Availability": "AM"
- },
- {
-   "Sno": 8,
-   "Name": "Naren",
-   "ID": "DOC008",
-   "Specialisation": "ENT",
-   "Availability": "Both"
  }
 ]
