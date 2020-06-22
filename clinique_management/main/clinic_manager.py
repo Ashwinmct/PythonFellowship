@@ -1,5 +1,4 @@
 import enum
-
 from clinique_management.main.clinic_file_manager import ClinicFileManager
 from clinique_management.main.person_type import PersonType
 
@@ -25,8 +24,12 @@ class ClinicManager:
 		file_data = file_loader.open(person_type, file_path)
 		return file_data
 
-	def search_by(self, option, value):
-		for doctor in self.doctor_details_list:
-			if doctor.__getattribute__(option.value) == value:
+	def search_by(self, person_type, option, value):
+		person_list = self.__get_details_of(person_type)
+		for person in person_list:
+			if person.__getattribute__(option.value) == value:
 				return True
 		return False
+
+	def __get_details_of(self, person_type):
+		return self.doctor_details_list if person_type == PersonType.DOCTOR else self.patient_details_list
