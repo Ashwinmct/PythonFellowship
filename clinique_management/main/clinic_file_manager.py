@@ -1,5 +1,4 @@
 import json
-
 from clinique_management.main.person_type import PersonType
 from .patient import Patient
 from .doctor import Doctor

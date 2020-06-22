@@ -1,8 +1,18 @@
+import enum
+
 from clinique_management.main.clinic_file_manager import ClinicFileManager
 from clinique_management.main.person_type import PersonType
 
 
 class ClinicManager:
+
+	class Option(enum.Enum):
+		NAME = 'name'
+		ID = 'id'
+		SPECIALISATION = 'specialisation'
+		AGE = 'age'
+		MOBILE_NUMBER = 'mobile_number'
+
 	DOCTORS_DETAILS_FILE_PATH = "DoctorsDetails.json"
 	PATIENT_DETAILS_FILE_PATH = "PatientsDetails.json"
 
@@ -15,8 +25,8 @@ class ClinicManager:
 		file_data = file_loader.open(person_type, file_path)
 		return file_data
 
-	def search_doctor_by_name(self, name):
+	def search_by(self, option, value):
 		for doctor in self.doctor_details_list:
-			if doctor.name == name:
+			if doctor.__getattribute__(option.value) == value:
 				return True
 		return False
