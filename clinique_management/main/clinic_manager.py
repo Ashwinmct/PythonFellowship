@@ -48,4 +48,4 @@ class ClinicManager:
 		for person in person_list:
 			if person.name == name:
 				return person
-
+		raise ClinicManagementError(ClinicManagementError.ExceptionType.NOT_FOUND)

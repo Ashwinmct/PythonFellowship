@@ -1,3 +1,4 @@
+from clinique_management.main.clinic_management_exception import ClinicManagementError
 from clinique_management.main.clinic_manager import ClinicManager
 from clinique_management.main.person_type import PersonType
 
@@ -35,8 +36,15 @@ class TestClinicManager:
 		clinic_manager = ClinicManager()
 		assert clinic_manager.search_by(PersonType.PATIENT, ClinicManager.Option.ID, "P001")
 
-	def test_given_patient_should_get_appointment_from_the_doctor(self):
+	def test_given_patient_and_doctor_when_doctor_is_available_should_get_appointment_from_the_doctor(self):
 		clinic_manager = ClinicManager()
 		expected_message = "appointment fixed"
 		message_got = clinic_manager.fix_appointment("Ashwin", "Sarath")
 		assert expected_message == message_got
+
+	def test_given_patient_and_doctor_when_doctor_not_existed_should_throw_exception(self):
+		try:
+			clinic_manager = ClinicManager()
+			clinic_manager.fix_appointment("a", "Sarath")
+		except ClinicManagementError as error:
+			assert ClinicManagementError.ExceptionType.NOT_FOUND == error.exception_type
