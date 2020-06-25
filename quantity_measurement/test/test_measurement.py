@@ -1,3 +1,4 @@
+import pytest
 from quantity_measurement.main.length import Length
 from quantity_measurement.main.measurement_units import MeasurementUnit
 from quantity_measurement.main.measurement_exception import MeasurementError
@@ -18,3 +19,13 @@ class TestMeasurement:
 			measurement1.__add__(measurement2)
 		except MeasurementError as err:
 			assert MeasurementError.ExceptionType.INVALID_ADDITION == err .exception_type
+
+	def test_given_measurement_with_string_value_when_created_should_raise_exception(self):
+		with pytest.raises(MeasurementError) as error:
+			Length(MeasurementUnit.INCH, 'a')
+			assert error.exception_type == MeasurementError.ExceptionType.INVALID_VALUE
+
+	def test_given_measurement_with_boolean_value_when_created_should_raise_exception(self):
+		with pytest.raises(MeasurementError) as error:
+			Length(MeasurementUnit.FAHRENHEIT, True)
+			assert error.exception_type == MeasurementError.ExceptionType.INVALID_VALUE

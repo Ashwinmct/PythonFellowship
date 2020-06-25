@@ -5,6 +5,8 @@ from .measurement_exception import MeasurementError
 class Measurement(abc.ABC):
 
 	def __init__(self, unit, value):
+		if not ( isinstance(value, float) or isinstance(value, int) ):
+			raise MeasurementError(MeasurementError.ExceptionType.INVALID_VALUE)
 		self.value = value
 		self.unit = unit
 

@@ -2,6 +2,7 @@ from ..main.temperature import Temperature
 from ..main.measurement_units import MeasurementUnit
 from ..main.measurement_exception import MeasurementError
 
+
 class TestTemperature:
 	def test_given_temperature_with_same_value_and_unit_when_equalised_should_return_true(self):
 		temperature1 = Temperature(MeasurementUnit.CELSIUS, 1)
