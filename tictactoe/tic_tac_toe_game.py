@@ -40,7 +40,6 @@ class TicTacToe:
 			print("Match Tie")
 
 	def __print_board(self):
-		global tic_tac_toe_board
 		print("TicTacToe Board")
 		for row in range(len(tic_tac_toe_board)):
 			print("%s || %s || %s" % (tic_tac_toe_board[row][0], tic_tac_toe_board[row][1], tic_tac_toe_board[row][2]))
@@ -70,10 +69,9 @@ class TicTacToe:
 			player1 = self.__user
 			player2 = self.__computer
 			return
-		else:
-			print("COMPUTER won the toss")
-			player1 = self.__computer
-			player2 = self.__user
+		print("COMPUTER won the toss")
+		player1 = self.__computer
+		player2 = self.__user
 
 	def __check_winner(self):
 		###check rows
@@ -121,7 +119,6 @@ class TicTacToe:
 		return user_input
 
 	def __store_board(self, position, player):
-		global tic_tac_toe_board
 		cell_position = (position % 3) - 1
 		if position <= 3:
 			tic_tac_toe_board[0][cell_position] = player
